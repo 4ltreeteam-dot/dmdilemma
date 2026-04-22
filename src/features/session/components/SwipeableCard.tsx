@@ -45,7 +45,7 @@ export function SwipeableCard({ children, onSwipe }: Props) {
   }));
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={styles.root}>
       <GestureDetector gesture={pan}>
         <Animated.View style={[styles.container, animatedStyle]}>{children}</Animated.View>
       </GestureDetector>
@@ -54,5 +54,6 @@ export function SwipeableCard({ children, onSwipe }: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: { padding: 16 },
+  root: { flex: 1 },
+  container: { flex: 1 },
 });
