@@ -12,7 +12,49 @@
         "themeEn": "Tavern Meeting",
         "narrativeKo": "네 명의 모험가가 여관에서 처음 만난다. 한 노인이 다가와 용 퇴치 의뢰를 제안한다.",
         "narrativeEn": "Four adventurers meet at a tavern. An old man approaches with a dragon-slaying contract.",
-        "cardTags": ["npc", "tavern", "opening"]
+        "cardTags": ["npc", "tavern", "opening"],
+        "situations": [
+          {
+            "id": "dr_s1_tavern_arrive",
+            "sceneKo": "여관 도착",
+            "sceneEn": "Arrival at the Inn",
+            "narrativeKo": "비 오는 밤, 북방 변경의 여관. 파티가 처음으로 한 자리에 모인다.",
+            "narrativeEn": "A rainy night at the northern inn. The party gathers for the first time.",
+            "entryCardId": "dr_s1_01_arrive"
+          },
+          {
+            "id": "dr_s2_old_man",
+            "sceneKo": "노인의 의뢰",
+            "sceneEn": "The Old Man's Quest",
+            "narrativeKo": "젖은 외투의 노인이 파티에게 접근한다. 그의 눈빛엔 절박함과 숨긴 것이 있다.",
+            "narrativeEn": "A cloaked old man approaches. Desperation and hidden truth in his eyes.",
+            "entryCardId": "dr_s2_01_old_man_approach"
+          },
+          {
+            "id": "dr_s3_party_bond",
+            "sceneKo": "파티 결성",
+            "sceneEn": "Forging the Party",
+            "narrativeKo": "의뢰를 받은 네 명이 서로를 바라본다. 처음 만난 사이. 어떻게 뭉칠 것인가?",
+            "narrativeEn": "Four strangers linked by a quest. How will they bond?",
+            "entryCardId": "dr_s3_01_introductions"
+          },
+          {
+            "id": "dr_s4_departure",
+            "sceneKo": "출발 준비",
+            "sceneEn": "Preparing to Depart",
+            "narrativeKo": "새벽이 밝아온다. 짐을 정리하고, 작은 갈등을 풀고, 길을 떠난다.",
+            "narrativeEn": "Dawn breaks. Gear checked, tensions settled, the road begins.",
+            "entryCardId": "dr_s4_01_gear_check"
+          },
+          {
+            "id": "dr_s5_close",
+            "sceneKo": "세션 마무리",
+            "sceneEn": "Session Wrap",
+            "narrativeKo": "플레이어들이 주사위를 내려놓고 오늘의 이야기를 마무리한다.",
+            "narrativeEn": "Players set down their dice. Tonight's tale closes.",
+            "entryCardId": "dr_s5_01_close"
+          }
+        ]
       },
       {
         "sessionIndex": 2,

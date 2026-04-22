@@ -9,6 +9,7 @@ import { CardView } from '@/features/session/components/CardView';
 import { SwipeableCard } from '@/features/session/components/SwipeableCard';
 import { DmScreenPanel } from '@/features/session/components/DmScreenPanel';
 import { DiceRollOverlay } from '@/features/session/components/DiceRollOverlay';
+import { SceneBanner } from '@/features/session/components/SceneBanner';
 import { isDiceChoice } from '@/shared/types/card';
 import { resolveDiceChoice, type DiceResolution } from '@/features/session/engine/diceResolver';
 import charactersData from '@/content/characters.json';
@@ -29,6 +30,8 @@ export default function SessionScreen() {
   const roller = useGameStore(s => s.roller);
   const startSession = useGameStore(s => s.startSession);
   const applyChoice = useGameStore(s => s.applyChoice);
+  const situations = useGameStore(s => s.situations);
+  const situationProgress = useGameStore(s => s.situationProgress);
   const campaign = useCampaignStore(s => s.campaign);
   const useDmAction = useCampaignStore(s => s.useDmAction);
 
@@ -82,6 +85,12 @@ export default function SessionScreen() {
   const [p1, p2, p3, p4] = session.party;
   const scenario = campaign ? scenarios.find(s => s.id === campaign.scenarioId) : null;
   const theme = scenario?.sessionThemes.find(t => t.sessionIndex === session.sessionIndex);
+
+  const currentSituation = situations && situationProgress ? situations[situationProgress.situationIndex] : null;
+  const situationLabel = currentSituation && situations
+    ? `상황 ${situationProgress!.situationIndex + 1}/${situations.length}`
+    : undefined;
+
   const sessionLabel = campaign
     ? `S${campaign.sessionIndex}/${campaign.totalSessions} · ${theme?.themeKo ?? session.phase}`
     : `Session 1 · ${session.phase}`;
@@ -97,7 +106,7 @@ export default function SessionScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>{sessionLabel} · {session.cardsRemaining}장 남음</Text>
+        <Text style={styles.headerText}>{sessionLabel}</Text>
       </View>
       <View style={styles.partyGrid}>
         <View style={styles.partyRow}>
@@ -111,6 +120,13 @@ export default function SessionScreen() {
       </View>
       {campaign && (
         <DmScreenPanel state={campaign.dmScreen} onAction={useDmAction} />
+      )}
+      {currentSituation && (
+        <SceneBanner
+          sceneKo={currentSituation.sceneKo}
+          narrativeKo={currentSituation.narrativeKo}
+          situationLabel={situationLabel}
+        />
       )}
       <View style={styles.cardArea}>
         {session.currentCard && !session.isEnded ? (
@@ -136,10 +152,10 @@ export default function SessionScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#111' },
-  header: { paddingVertical: 8, alignItems: 'center' },
-  headerText: { color: '#888', fontSize: 12 },
-  partyGrid: { paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: '#222' },
-  partyRow: { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 4 },
+  header: { paddingVertical: 6, alignItems: 'center' },
+  headerText: { color: '#888', fontSize: 11 },
+  partyGrid: { paddingVertical: 4, borderBottomWidth: 1, borderBottomColor: '#222' },
+  partyRow: { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 2 },
   cardArea: { flex: 1, justifyContent: 'center' },
   info: { color: '#fff', textAlign: 'center' },
   exit: { padding: 12, alignItems: 'center' },

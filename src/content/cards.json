@@ -744,5 +744,261 @@
       { "direction": "right", "labelKo": "다음 모험 계획", "labelEn": "Plan next adventure", "effects": [{ "target": "all", "delta": 2 }] }
     ],
     "weight": 7, "cooldown": 6, "tags": ["epilogue", "tavern", "rest"]
+  },
+  {
+    "id": "dr_s1_01_arrive",
+    "situationId": "dr_s1_tavern_arrive",
+    "category": "spotlight",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "sceneKo": "북방 변경의 여관, 비오는 밤",
+    "narrativeKo": "젖은 망토를 털며 문을 여는 네 명의 모험가. 여관은 장작 냄새와 낮은 웃음 소리로 가득하다. 카운터 뒤의 여주인이 손짓으로 자리를 안내한다.",
+    "promptKo": "파티가 자리를 잡는다. 어디로 안내할까?",
+    "promptEn": "The party enters the inn. Where to seat them?",
+    "choices": [
+      { "direction": "left",  "labelKo": "구석진 테이블 (신중)",  "labelEn": "Quiet corner", "effects": [{ "target": "rogue", "delta": 1 }, { "target": "wizard", "delta": 1 }], "consequenceKo": "시야가 좋고 대화 엿듣기도 쉽다.", "nextCardId": "dr_s1_02_drinks" },
+      { "direction": "right", "labelKo": "중앙 테이블 (주목)",    "labelEn": "Center table",  "effects": [{ "target": "fighter", "delta": 2 }, { "target": "rogue", "delta": -1 }], "consequenceKo": "눈에 띈다. 누군가가 관찰한다.", "nextCardId": "dr_s1_02_drinks" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "scene"]
+  },
+  {
+    "id": "dr_s1_02_drinks",
+    "situationId": "dr_s1_tavern_arrive",
+    "category": "table_management",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "sceneKo": "여관, 테이블에 앉은 직후",
+    "narrativeKo": "술과 빵이 나온다. 클레릭이 축복을 조용히 읊는다. 도적은 이미 주변 얼굴을 훑고 있다. 문 쪽에서 젖은 외투의 노인이 들어선다.",
+    "promptKo": "파티가 쉬고 있을 때 분위기를 어떻게 잡을까?",
+    "promptEn": "How to set the tone of this moment of respite?",
+    "choices": [
+      { "direction": "left",  "labelKo": "자연스레 대화",   "labelEn": "Natural banter", "effects": [{ "target": "all", "delta": 1 }], "consequenceKo": "파티 분위기가 풀린다.", "nextCardId": "dr_s2_01_old_man_approach" },
+      { "direction": "right", "labelKo": "긴장 유지",       "labelEn": "Keep guard up",   "effects": [{ "target": "fighter", "delta": 1 }, { "target": "cleric", "delta": -1 }], "consequenceKo": "전사가 주변을 경계한다.", "nextCardId": "dr_s2_01_old_man_approach" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "scene"]
+  },
+  {
+    "id": "dr_s2_01_old_man_approach",
+    "situationId": "dr_s2_old_man",
+    "category": "spotlight",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "sceneKo": "여관, 노인의 접근",
+    "narrativeKo": "젖은 외투의 노인이 파티 테이블 앞에서 멈춘다. 주름진 손으로 모자를 벗고, 낮은 목소리로 말한다.\n\n\"실례합니다. 당신들... 모험가 맞지요?\"",
+    "promptKo": "마법사가 DM을 쳐다본다: \"들어볼까요?\"",
+    "promptEn": "The Wizard glances at the DM: \"Should we listen?\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "경청 허용",    "labelEn": "Listen",   "effects": [{ "target": "wizard", "delta": 1 }, { "target": "cleric", "delta": 1 }], "consequenceKo": "파티가 자리를 내어준다.", "nextCardId": "dr_s2_02_quest_reveal" },
+      { "direction": "right", "labelKo": "무시 유도",    "labelEn": "Wave him off", "effects": [{ "target": "fighter", "delta": 1 }, { "target": "wizard", "delta": -2 }], "consequenceKo": "노인이 상처받은 표정으로 물러선다.", "nextCardId": "dr_s2_alt_ignore" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "npc"]
+  },
+  {
+    "id": "dr_s2_02_quest_reveal",
+    "situationId": "dr_s2_old_man",
+    "category": "spotlight",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "sceneKo": "노인이 지도를 펼친다",
+    "narrativeKo": "노인이 양피지 지도를 펼친다. 북방의 산맥, 붉은 잉크로 동그라미 친 자리.\n\n\"한 달 전, 산에서 붉은 빛이 솟았소. 마을 하나가 사라졌고, 또 한 마을은 아이들만 남았지... 천 년 전 잠든 용이 깨어났습니다.\"",
+    "promptKo": "마법사의 눈빛이 날카롭다. 이 이야기를 어떻게 받아줄까?",
+    "promptEn": "The Wizard's eyes sharpen. How do we handle this?",
+    "choices": [
+      { "direction": "left",  "labelKo": "진지한 관심",    "labelEn": "Take it seriously",  "effects": [{ "target": "wizard", "delta": 2 }, { "target": "cleric", "delta": 1 }], "consequenceKo": "마법사가 질문을 준비한다.", "nextCardId": "dr_s2_03_wizard_doubt" },
+      { "direction": "right", "labelKo": "당돌한 대응",    "labelEn": "Confront skeptically", "effects": [{ "target": "rogue", "delta": 2 }, { "target": "wizard", "delta": -1 }], "consequenceKo": "도적이 노인을 빤히 본다.", "nextCardId": "dr_s2_04_rogue_probe" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "npc", "quest"]
+  },
+  {
+    "id": "dr_s2_03_wizard_doubt",
+    "situationId": "dr_s2_old_man",
+    "category": "improv_ruling",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "sceneKo": "마법사의 의심",
+    "narrativeKo": "마법사가 조용히 속삭인다: \"저 사람 가방에서 마법 흔적이 느껴져요. 일반인 아닙니다.\"\n\n노인은 미소를 유지하고 있다. 너무 태연하다.",
+    "promptKo": "마법사의 감지를 어떻게 반영할까?",
+    "promptEn": "How to handle the Wizard's sensing?",
+    "choices": [
+      { "direction": "left",  "labelKo": "마법사 말 신뢰 (파고들기)",  "labelEn": "Trust Wizard, probe deeper", "effects": [{ "target": "wizard", "delta": 3 }, { "target": "fighter", "delta": -1 }], "consequenceKo": "대화가 심문으로 바뀐다.", "nextCardId": "dr_s2_05_old_man_reveals" },
+      { "direction": "right", "labelKo": "무시하고 진행",            "labelEn": "Ignore and proceed",       "effects": [{ "target": "wizard", "delta": -2 }, { "target": "fighter", "delta": 1 }], "consequenceKo": "마법사가 한숨을 쉰다.", "nextCardId": "dr_s2_06_offer" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "npc", "suspicion"]
+  },
+  {
+    "id": "dr_s2_04_rogue_probe",
+    "situationId": "dr_s2_old_man",
+    "category": "spotlight",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "sceneKo": "도적의 탐색",
+    "narrativeKo": "도적이 의자를 기울이며 말한다:\n\"할아버지, 보수는요? 그리고 왜 우리인가요? 이 마을엔 다른 모험가도 많을 텐데.\"\n\n노인의 미소가 잠시 흔들린다.",
+    "promptKo": "노인의 반응을 어떻게 연출할까?",
+    "promptEn": "How to portray the old man's reaction?",
+    "choices": [
+      { "direction": "left",  "labelKo": "수상함 드러냄",   "labelEn": "Let suspicion show",   "effects": [{ "target": "rogue", "delta": 3 }, { "target": "cleric", "delta": 1 }], "consequenceKo": "긴장이 돈다. 뭔가 숨기고 있다.", "nextCardId": "dr_s2_05_old_man_reveals" },
+      { "direction": "right", "labelKo": "매끄러운 답변",   "labelEn": "Smooth answer",         "effects": [{ "target": "rogue", "delta": -1 }, { "target": "wizard", "delta": -1 }], "consequenceKo": "노인이 계속 자연스럽다.", "nextCardId": "dr_s2_06_offer" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "npc"]
+  },
+  {
+    "id": "dr_s2_05_old_man_reveals",
+    "situationId": "dr_s2_old_man",
+    "category": "backstory",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "sceneKo": "노인의 고백",
+    "narrativeKo": "노인이 한숨을 쉬며 후드를 내린다. 관자놀이에 용 문신.\n\n\"...사실 저도 마법사요. 그 용은... 내 스승이 봉인한 것이고, 이번에 봉인이 풀린 건 내 책임입니다.\"",
+    "promptKo": "이 고백을 어떻게 다룰까?",
+    "promptEn": "How to handle this revelation?",
+    "choices": [
+      { "direction": "left",  "labelKo": "동정 유도",       "labelEn": "Draw sympathy",     "effects": [{ "target": "cleric", "delta": 3 }, { "target": "all", "delta": 1 }], "consequenceKo": "파티가 연민을 느낀다.", "nextCardId": "dr_s2_06_offer" },
+      { "direction": "right", "labelKo": "경계 유지",       "labelEn": "Stay wary",          "effects": [{ "target": "rogue", "delta": 2 }, { "target": "cleric", "delta": -1 }], "consequenceKo": "의심은 사라지지 않는다.", "nextCardId": "dr_s2_06_offer" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "lore", "drama"]
+  },
+  {
+    "id": "dr_s2_06_offer",
+    "situationId": "dr_s2_old_man",
+    "category": "spotlight",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "sceneKo": "의뢰 조건",
+    "narrativeKo": "\"보수는 금화 5,000. 성공 시 용의 심장 조각 하나도 가져가셔도 됩니다. 실패하면... 더 큰 희생이 따를 겁니다.\"\n\n전사가 눈을 빛낸다. 도적은 금화라는 말에 반응한다. 마법사는 여전히 주저한다.",
+    "promptKo": "DM은 협상을 어떻게 마무리할까?",
+    "promptEn": "How does the DM close the negotiation?",
+    "choices": [
+      { "direction": "left",  "labelKo": "합의 유도 (수락)",  "labelEn": "Seal the deal", "effects": [{ "target": "fighter", "delta": 2 }, { "target": "rogue", "delta": 2 }, { "target": "wizard", "delta": -1 }], "consequenceKo": "의뢰 수락. 여정의 문이 열린다.", "nextCardId": "dr_s3_01_introductions" },
+      { "direction": "right", "labelKo": "조건 협상 유도",    "labelEn": "Push for terms", "effects": [{ "target": "wizard", "delta": 2 }, { "target": "rogue", "delta": 1 }], "consequenceKo": "노인이 보수를 올린다: 금화 7,500.", "nextCardId": "dr_s3_01_introductions" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "quest"]
+  },
+  {
+    "id": "dr_s2_alt_ignore",
+    "situationId": "dr_s2_old_man",
+    "category": "spotlight",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "sceneKo": "노인이 떠나간다",
+    "narrativeKo": "노인이 머리를 숙이고 다른 테이블로 향한다. 모퉁이 테이블의 기사단이 그에게 손짓한다.",
+    "promptKo": "파티의 선택을 되돌릴 기회를 줄까?",
+    "promptEn": "Give the party a chance to reconsider?",
+    "choices": [
+      { "direction": "left",  "labelKo": "다시 불러세우기",   "labelEn": "Call him back",   "effects": [{ "target": "cleric", "delta": 1 }], "consequenceKo": "노인이 돌아온다.", "nextCardId": "dr_s2_02_quest_reveal" },
+      { "direction": "right", "labelKo": "결과 감수",         "labelEn": "Let it be",        "effects": [{ "target": "fighter", "delta": -1 }, { "target": "cleric", "delta": -1 }], "consequenceKo": "기사단이 의뢰를 받는다. 이 여정은 없던 일이 된다.", "nextCardId": "dr_s3_01_introductions" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "npc"]
+  },
+  {
+    "id": "dr_s3_01_introductions",
+    "situationId": "dr_s3_party_bond",
+    "category": "spotlight",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "sceneKo": "파티 결성 — 서로를 알아가기",
+    "narrativeKo": "이제 밤이 깊다. 여관 주인이 불을 줄이고 있다. 파티는 처음 만난 서로의 얼굴을 본다.\n\n도적이 잔을 돌리며 말한다: \"이왕 한 배를 탔으니, 서로 자기 소개라도 할까?\"",
+    "promptKo": "자기소개 장면을 어떻게 구성할까?",
+    "promptEn": "How to frame the introductions?",
+    "choices": [
+      { "direction": "left",  "labelKo": "도적의 백스토리 허용", "labelEn": "Let Rogue monologue", "effects": [{ "target": "rogue", "delta": 3 }, { "target": "fighter", "delta": -1 }], "consequenceKo": "도적의 긴 사연이 시작된다.", "nextCardId": "dr_s3_02_rogue_tale" },
+      { "direction": "right", "labelKo": "간단한 인사로",      "labelEn": "Keep it brief",       "effects": [{ "target": "fighter", "delta": 2 }, { "target": "rogue", "delta": -2 }], "consequenceKo": "전사가 만족한다. 도적은 입을 다문다.", "nextCardId": "dr_s3_03_brief_quiet" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "party"]
+  },
+  {
+    "id": "dr_s3_02_rogue_tale",
+    "situationId": "dr_s3_party_bond",
+    "category": "backstory",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "sceneKo": "도적의 긴 사연",
+    "narrativeKo": "\"저는 제국 남부의 고아 출신입니다. 길거리에서 자랐고, 열네 살 때 암살자 길드에 들어갔다가, 배신당해서...\"\n\n전사가 하품을 참는다. 클레릭은 진심으로 듣고 있다. 마법사는 논리적 모순을 찾는 중이다.",
+    "promptKo": "사연을 어디까지 들을 것인가?",
+    "promptEn": "How long to let this go?",
+    "choices": [
+      { "direction": "left",  "labelKo": "끝까지 경청",  "labelEn": "Hear it all",  "effects": [{ "target": "rogue", "delta": 3 }, { "target": "cleric", "delta": 2 }, { "target": "fighter", "delta": -2 }], "consequenceKo": "깊은 유대감 형성. 그러나 전사는 지친다.", "nextCardId": "dr_s4_01_gear_check" },
+      { "direction": "right", "labelKo": "자르기",       "labelEn": "Cut it short",  "effects": [{ "target": "rogue", "delta": -2 }, { "target": "fighter", "delta": 2 }], "consequenceKo": "도적이 삐친다. 전사가 안도한다.", "nextCardId": "dr_s4_01_gear_check" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "backstory"]
+  },
+  {
+    "id": "dr_s3_03_brief_quiet",
+    "situationId": "dr_s3_party_bond",
+    "category": "spotlight",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "sceneKo": "짧은 인사 — 어색한 침묵",
+    "narrativeKo": "각자 이름과 직업만 말하고 입을 다문다. 어색한 침묵. 클레릭이 어색하게 미소 짓는다.",
+    "promptKo": "이 어색함을 어떻게 처리할까?",
+    "promptEn": "How to handle this awkwardness?",
+    "choices": [
+      { "direction": "left",  "labelKo": "클레릭이 분위기 전환", "labelEn": "Cleric breaks ice", "effects": [{ "target": "cleric", "delta": 2 }, { "target": "all", "delta": 1 }], "consequenceKo": "클레릭의 농담으로 분위기가 풀린다.", "nextCardId": "dr_s4_01_gear_check" },
+      { "direction": "right", "labelKo": "침묵 유지",            "labelEn": "Let it stay",        "effects": [{ "target": "fighter", "delta": 1 }, { "target": "cleric", "delta": -2 }], "consequenceKo": "서로 거리감을 둔다.", "nextCardId": "dr_s4_01_gear_check" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "party"]
+  },
+  {
+    "id": "dr_s4_01_gear_check",
+    "situationId": "dr_s4_departure",
+    "category": "improv_ruling",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "sceneKo": "출발 전날 — 장비 점검",
+    "narrativeKo": "새벽이 밝아온다. 여관 앞마당에서 파티가 짐을 정리한다. 마법사가 노트와 펜을 꺼내 목록을 점검하기 시작한다.\n\n전사: \"그거 꼭 해야 돼요? 빨리 출발하는 게 낫지 않나?\"",
+    "promptKo": "점검 방식을 어떻게 처리할까?",
+    "promptEn": "How to handle the gear check?",
+    "choices": [
+      { "direction": "left",  "labelKo": "철저하게",   "labelEn": "Thorough check", "effects": [{ "target": "wizard", "delta": 3 }, { "target": "fighter", "delta": -2 }], "consequenceKo": "마법사가 만족하지만 전사가 지루해한다.", "nextCardId": "dr_s4_02_tension" },
+      { "direction": "right", "labelKo": "빠르게",     "labelEn": "Quick & dirty",   "effects": [{ "target": "fighter", "delta": 2 }, { "target": "wizard", "delta": -2 }], "consequenceKo": "전사가 감사해한다. 마법사는 뒤에서 노트에 적는다.", "nextCardId": "dr_s4_03_depart" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "prep"]
+  },
+  {
+    "id": "dr_s4_02_tension",
+    "situationId": "dr_s4_departure",
+    "category": "rule_dispute",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "sceneKo": "긴장 — 전사의 짜증",
+    "narrativeKo": "전사가 무기를 거칠게 정리하며 소리친다:\n\"30분째 체크리스트 보고 계시잖아요! 용은 기다려주지 않습니다!\"\n\n마법사가 고개를 들지 않고 대답: \"죽는 건 준비가 부족할 때입니다.\"",
+    "promptKo": "이 갈등을 어떻게 해소할까?",
+    "promptEn": "How to resolve the conflict?",
+    "choices": [
+      { "direction": "left",  "labelKo": "룰대로 중재 (클레릭 판정)", "labelEn": "Mediate by RAW",        "effects": [{ "target": "cleric", "delta": 2 }, { "target": "wizard", "delta": 1 }, { "target": "fighter", "delta": -1 }], "consequenceKo": "클레릭이 타협점을 찾는다.", "nextCardId": "dr_s4_03_depart" },
+      { "direction": "right", "labelKo": "드라마로 (한쪽 편들기)",     "labelEn": "Take a side",          "effects": [{ "target": "fighter", "delta": 3 }, { "target": "wizard", "delta": -3 }], "consequenceKo": "전사가 만족. 마법사는 노트를 조용히 접는다.", "nextCardId": "dr_s4_03_depart" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "drama"]
+  },
+  {
+    "id": "dr_s4_03_depart",
+    "situationId": "dr_s4_departure",
+    "category": "spotlight",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "sceneKo": "출발 — 북쪽 길 위에서",
+    "narrativeKo": "여관 주인이 문 앞에서 손을 흔든다. 네 명의 모험가가 북쪽 길에 선다. 멀리 산맥이 흐릿하게 보이고, 그 뒤로 구름이 붉게 물들어 있다.\n\n전사: \"가자.\"\n클레릭: \"신이 함께하시길.\"",
+    "promptKo": "세션 마지막을 어떻게 마무리할까?",
+    "promptEn": "How to close the session?",
+    "choices": [
+      { "direction": "left",  "labelKo": "조용한 결의",  "labelEn": "Silent resolve",   "effects": [{ "target": "all", "delta": 2 }], "consequenceKo": "묵묵히 걷는 네 명. 다음 주에 이어서.", "nextCardId": "dr_s5_01_close" },
+      { "direction": "right", "labelKo": "불길한 전조",  "labelEn": "Ominous foreshadow", "effects": [{ "target": "wizard", "delta": 1 }, { "target": "rogue", "delta": -1 }], "consequenceKo": "하늘의 붉은 빛이 잠시 밝아졌다가 사라진다.", "nextCardId": "dr_s5_01_close" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "departure"]
+  },
+  {
+    "id": "dr_s5_01_close",
+    "situationId": "dr_s5_close",
+    "category": "table_management",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "sceneKo": "세션 마무리",
+    "narrativeKo": "플레이어들이 주사위를 내려놓는다. 전사가 기지개를 켠다. 마법사가 오늘의 메모를 정리한다. 도적이 먼저 일어서며 말한다: \"다음 주 같은 시간에 봐요.\"",
+    "promptKo": "오늘 세션을 어떻게 마칠까?",
+    "promptEn": "How to wrap up tonight?",
+    "choices": [
+      { "direction": "left",  "labelKo": "간단한 요약",   "labelEn": "Brief recap",    "effects": [{ "target": "all", "delta": 1 }], "consequenceKo": "서로 다음 주 계획을 잡는다." },
+      { "direction": "right", "labelKo": "예고편 연출",   "labelEn": "Tease next time", "effects": [{ "target": "wizard", "delta": 2 }, { "target": "rogue", "delta": 1 }], "consequenceKo": "\"다음 주엔 습격당한 마을로 갑시다.\"" }
+    ],
+    "weight": 1, "cooldown": 999, "tags": ["dr_s1", "epilogue"]
   }
 ]

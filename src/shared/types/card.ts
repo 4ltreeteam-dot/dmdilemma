@@ -28,6 +28,7 @@ export type CardChoice = {
   effects: SatisfactionEffect[];
   consequenceKo?: string;
   consequenceEn?: string;
+  nextCardId?: string;
 };
 
 export type DiceBucket = {
@@ -60,6 +61,10 @@ export type Card = {
   dramaLevel: DramaLevel;
   minSession: number;
   maxSession?: number;
+  sceneKo?: string;
+  sceneEn?: string;
+  narrativeKo?: string;
+  narrativeEn?: string;
   promptKo: string;
   promptEn: string;
   flavorKo?: string;
@@ -70,4 +75,5 @@ export type Card = {
   weight: number;
   cooldown: number;
   tags: string[];
+  situationId?: string;
 };
