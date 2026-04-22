@@ -1,6 +1,8 @@
 import type { Card } from '@/shared/types/card';
 import type { CharacterId } from '@/shared/types/character';
+import type { SessionPhase } from '@/shared/types/session';
 import type { DiceRoller } from '@/features/dice/roller';
+import { dramaWeightFor } from './phaseEngine';
 
 export type CardSelectionContext = {
   pool: Card[];
@@ -9,6 +11,7 @@ export type CardSelectionContext = {
   cardIndex: number;
   roller: DiceRoller;
   sessionIndex?: number;
+  phase?: SessionPhase;
 };
 
 function isEligible(card: Card, ctx: CardSelectionContext): boolean {
@@ -35,13 +38,22 @@ function isEligible(card: Card, ctx: CardSelectionContext): boolean {
   return true;
 }
 
-function weightedPick(candidates: Card[], roller: DiceRoller): Card {
-  const totalWeight = candidates.reduce((sum, c) => sum + c.weight, 0);
-  const roll = roller.roll(totalWeight);
+function effectiveWeight(card: Card, ctx: CardSelectionContext): number {
+  const phase = ctx.phase ?? 'main';
+  const phaseMultiplier = dramaWeightFor(card.dramaLevel, phase);
+  if (phaseMultiplier === 0) return 0.01;
+  return card.weight * (phaseMultiplier * 3);
+}
+
+function weightedPick(candidates: Card[], ctx: CardSelectionContext): Card {
+  const weights = candidates.map(c => effectiveWeight(c, ctx));
+  const totalWeight = weights.reduce((sum, w) => sum + w, 0);
+  const scaled = Math.max(1, Math.round(totalWeight * 100));
+  const roll = ctx.roller.roll(scaled);
   let acc = 0;
-  for (const card of candidates) {
-    acc += card.weight;
-    if (roll <= acc) return card;
+  for (let i = 0; i < candidates.length; i++) {
+    acc += Math.round(weights[i]! * 100);
+    if (roll <= acc) return candidates[i]!;
   }
   return candidates[candidates.length - 1]!;
 }
@@ -49,5 +61,5 @@ function weightedPick(candidates: Card[], roller: DiceRoller): Card {
 export function selectNextCard(ctx: CardSelectionContext): Card | null {
   const eligible = ctx.pool.filter(c => isEligible(c, ctx));
   if (eligible.length === 0) return null;
-  return weightedPick(eligible, ctx.roller);
+  return weightedPick(eligible, ctx);
 }
