@@ -1,0 +1,82 @@
+[
+  {
+    "id": "bad_phone_call",
+    "kind": "bad",
+    "nameKo": "전화 한 통",
+    "nameEn": "Phone Call",
+    "descriptionKo": "플레이어가 \"전화 한 통만\" 한다며 나가서 돌아오지 않았다.",
+    "descriptionEn": "A player stepped out for \"just one call\" and never came back.",
+    "trigger": { "type": "player_left" },
+    "legendPoints": 10
+  },
+  {
+    "id": "bad_snack_run",
+    "kind": "bad",
+    "nameKo": "과자 사러",
+    "nameEn": "Snack Run",
+    "descriptionKo": "플레이어가 간식을 사러 나간 뒤 귀가 핑계를 댔다.",
+    "descriptionEn": "A player left for snacks and never quite made it back.",
+    "trigger": { "type": "player_left" },
+    "legendPoints": 10
+  },
+  {
+    "id": "bad_rules_walkout",
+    "kind": "bad",
+    "nameKo": "룰 항의 이탈",
+    "nameEn": "Rules Walkout",
+    "descriptionKo": "룰 해석 논쟁 끝에 플레이어가 자리를 박차고 떠났다.",
+    "descriptionEn": "A rules dispute escalated until the player walked out.",
+    "trigger": { "type": "player_left" },
+    "legendPoints": 10
+  },
+  {
+    "id": "bad_spotlight_drain",
+    "kind": "bad",
+    "nameKo": "존재감 증발",
+    "nameEn": "Spotlight Drain",
+    "descriptionKo": "한 플레이어가 \"제가 왜 여기 있지\" 자책하며 떠났다.",
+    "descriptionEn": "A player left muttering \"Why am I even here?\"",
+    "trigger": { "type": "player_left" },
+    "legendPoints": 10
+  },
+  {
+    "id": "good_legendary",
+    "kind": "legendary",
+    "nameKo": "전설의 캠페인",
+    "nameEn": "The Legendary Campaign",
+    "descriptionKo": "네 명 모두가 오래도록 회자할 전설의 세션들을 만들었다.",
+    "descriptionEn": "All four players left with stories they'll tell for years.",
+    "trigger": { "type": "completion_all_high", "minAverage": 75, "maxGap": 15 },
+    "legendPoints": 80
+  },
+  {
+    "id": "good_fighter_glory",
+    "kind": "good",
+    "nameKo": "전사의 영광",
+    "nameEn": "Fighter's Glory",
+    "descriptionKo": "전사가 활약했고, 다른 셋은 그 결말에 만족했다.",
+    "descriptionEn": "The Fighter shined. The others were content to witness.",
+    "trigger": { "type": "completion_character_dominant", "character": "fighter", "minValue": 85, "maxOthers": 70 },
+    "legendPoints": 30
+  },
+  {
+    "id": "good_peaceful_table",
+    "kind": "good",
+    "nameKo": "평화로운 식탁",
+    "nameEn": "Peaceful Table",
+    "descriptionKo": "클레릭의 중재로 갈등 없는 조화로운 세션이었다.",
+    "descriptionEn": "The Cleric's mediation kept conflicts at bay.",
+    "trigger": { "type": "completion_character_dominant", "character": "cleric", "minValue": 85, "maxOthers": 70 },
+    "legendPoints": 30
+  },
+  {
+    "id": "good_decent",
+    "kind": "good",
+    "nameKo": "무난한 세션",
+    "nameEn": "A Decent Session",
+    "descriptionKo": "기억에 남진 않지만 나쁠 것도 없었다.",
+    "descriptionEn": "Not memorable, but not bad either.",
+    "trigger": { "type": "completion_default" },
+    "legendPoints": 20
+  }
+]
