@@ -46,7 +46,7 @@ describe('gameStore', () => {
   it('session ends early if a character satisfaction drops to 0', () => {
     useGameStore.getState().startSession(1);
     const store = useGameStore.getState();
-    store.forceSatisfaction({ fighter: 0, wizard: 50, rogue: 50, cleric: 50 });
+    store.forceSatisfaction({ fighter: 0, wizard: 50, rogue: 50, cleric: 50, bard: 0, druid: 0 });
     store.applyChoice('left');
     const session = useGameStore.getState().session!;
     expect(session.isEnded).toBe(true);

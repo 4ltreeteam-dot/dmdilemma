@@ -30,6 +30,30 @@ export type CardChoice = {
   consequenceEn?: string;
 };
 
+export type DiceBucket = {
+  min: number;
+  max: number;
+  effects: SatisfactionEffect[];
+  flavorKo?: string;
+  flavorEn?: string;
+};
+
+export type DiceChoice = {
+  direction: SwipeDirection;
+  labelKo: string;
+  labelEn: string;
+  dice: {
+    sides: number;
+    buckets: DiceBucket[];
+  };
+};
+
+export type AnyChoice = CardChoice | DiceChoice;
+
+export function isDiceChoice(choice: AnyChoice): choice is DiceChoice {
+  return 'dice' in choice;
+}
+
 export type Card = {
   id: string;
   category: CardCategory;
@@ -42,7 +66,7 @@ export type Card = {
   flavorEn?: string;
   requiresCharacter?: CharacterId[];
   excludesCharacter?: CharacterId[];
-  choices: CardChoice[];
+  choices: AnyChoice[];
   weight: number;
   cooldown: number;
   tags: string[];

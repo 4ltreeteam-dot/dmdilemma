@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import type { Card, SwipeDirection } from '@/shared/types/card';
+import { isDiceChoice } from '@/shared/types/card';
 import type { CharacterId, PlayerCharacter } from '@/shared/types/character';
 import type { PartySatisfaction, SessionState } from '@/shared/types/session';
 import { TOTAL_CARDS_PER_SESSION } from '@/shared/types/session';
@@ -74,6 +75,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
     const choice = session.currentCard.choices.find(c => c.direction === direction);
     if (!choice) return;
+    if (isDiceChoice(choice)) return;
 
     const before = session.satisfaction;
     const after = applyEffects(before, choice.effects, session.party);

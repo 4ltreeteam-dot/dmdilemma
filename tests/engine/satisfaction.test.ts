@@ -2,7 +2,7 @@ import { applyEffects, clampSatisfaction } from '@/features/session/engine/satis
 import type { PartySatisfaction } from '@/shared/types/session';
 import type { SatisfactionEffect } from '@/shared/types/card';
 
-const base: PartySatisfaction = { fighter: 50, wizard: 50, rogue: 50, cleric: 50 };
+const base: PartySatisfaction = { fighter: 50, wizard: 50, rogue: 50, cleric: 50, bard: 0, druid: 0 };
 
 describe('satisfaction engine', () => {
   it('applies effect to a single character', () => {
@@ -15,7 +15,7 @@ describe('satisfaction engine', () => {
   it('applies "all" to every party member', () => {
     const effects: SatisfactionEffect[] = [{ target: 'all', delta: 1 }];
     const result = applyEffects(base, effects, ['fighter', 'wizard', 'rogue', 'cleric']);
-    expect(result).toEqual({ fighter: 51, wizard: 51, rogue: 51, cleric: 51 });
+    expect(result).toEqual({ fighter: 51, wizard: 51, rogue: 51, cleric: 51, bard: 0, druid: 0 });
   });
 
   it('applies "others" to non-specified members relative to first specified', () => {
@@ -37,7 +37,7 @@ describe('satisfaction engine', () => {
   });
 
   it('clamps via applyEffects when delta exceeds bounds', () => {
-    const edge: PartySatisfaction = { fighter: 98, wizard: 2, rogue: 50, cleric: 50 };
+    const edge: PartySatisfaction = { fighter: 98, wizard: 2, rogue: 50, cleric: 50, bard: 0, druid: 0 };
     const effects: SatisfactionEffect[] = [
       { target: 'fighter', delta: 5 },
       { target: 'wizard', delta: -5 },

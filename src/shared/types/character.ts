@@ -1,4 +1,4 @@
-export type CharacterId = 'fighter' | 'wizard' | 'rogue' | 'cleric';
+export type CharacterId = 'fighter' | 'wizard' | 'rogue' | 'cleric' | 'bard' | 'druid';
 
 export type ModifierTrigger = 'card_category' | 'other_character' | 'time_in_session';
 

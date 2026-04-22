@@ -38,5 +38,26 @@
     "modifierRules": [
       { "trigger": "card_category", "condition": "meta_break", "effect": -1, "description": "메타 브레이크에 불편함" }
     ]
+  },
+  {
+    "id": "bard",
+    "nameKo": "바드",
+    "nameEn": "Bard",
+    "archetype": "classic",
+    "defaultSatisfaction": 55,
+    "modifierRules": [
+      { "trigger": "card_category", "condition": "spotlight", "effect": 2, "description": "NPC 등장 카드 선호" },
+      { "trigger": "card_category", "condition": "backstory", "effect": 1, "description": "롤플레이 선호" }
+    ]
+  },
+  {
+    "id": "druid",
+    "nameKo": "드루이드",
+    "nameEn": "Druid",
+    "archetype": "classic",
+    "defaultSatisfaction": 50,
+    "modifierRules": [
+      { "trigger": "card_category", "condition": "meta_break", "effect": -2, "description": "메타 브레이크 기피" }
+    ]
   }
 ]
