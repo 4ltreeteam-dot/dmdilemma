@@ -39,16 +39,22 @@ export default function SessionScreen() {
     );
   }
 
-  const [top1, top2, bot1, bot2] = session.party;
+  const [p1, p2, p3, p4] = session.party;
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Session 1 · {session.cardsRemaining} cards left</Text>
       </View>
-      <View style={styles.row}>
-        <CharacterFrame characterId={top1!} name={nameOf(top1!)} satisfaction={session.satisfaction[top1!]} />
-        <CharacterFrame characterId={top2!} name={nameOf(top2!)} satisfaction={session.satisfaction[top2!]} />
+      <View style={styles.partyGrid}>
+        <View style={styles.partyRow}>
+          <CharacterFrame characterId={p1!} name={nameOf(p1!)} satisfaction={session.satisfaction[p1!]} />
+          <CharacterFrame characterId={p2!} name={nameOf(p2!)} satisfaction={session.satisfaction[p2!]} />
+        </View>
+        <View style={styles.partyRow}>
+          <CharacterFrame characterId={p3!} name={nameOf(p3!)} satisfaction={session.satisfaction[p3!]} />
+          <CharacterFrame characterId={p4!} name={nameOf(p4!)} satisfaction={session.satisfaction[p4!]} />
+        </View>
       </View>
       <View style={styles.cardArea}>
         {session.currentCard && !session.isEnded ? (
@@ -59,10 +65,6 @@ export default function SessionScreen() {
           <Text style={styles.info}>Session ending...</Text>
         )}
       </View>
-      <View style={styles.row}>
-        <CharacterFrame characterId={bot1!} name={nameOf(bot1!)} satisfaction={session.satisfaction[bot1!]} />
-        <CharacterFrame characterId={bot2!} name={nameOf(bot2!)} satisfaction={session.satisfaction[bot2!]} />
-      </View>
       <Pressable style={styles.exit} onPress={() => router.replace('/')}>
         <Text style={styles.exitText}>중단하고 홈으로</Text>
       </Pressable>
@@ -72,9 +74,10 @@ export default function SessionScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#111' },
-  header: { padding: 12, alignItems: 'center' },
+  header: { paddingVertical: 8, alignItems: 'center' },
   headerText: { color: '#888', fontSize: 12 },
-  row: { flexDirection: 'row', justifyContent: 'space-around' },
+  partyGrid: { paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: '#222' },
+  partyRow: { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 4 },
   cardArea: { flex: 1, justifyContent: 'center' },
   info: { color: '#fff', textAlign: 'center' },
   exit: { padding: 12, alignItems: 'center' },
