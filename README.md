@@ -9,20 +9,26 @@
 
 ## Status
 
-**Plan 1 (Core Loop Prototype) — 코드 완성, Android 스모크 테스트 대기**
+**Plan 2 (Full Game Loop) — 코드 완성, Android 스모크 테스트 대기**
 
-- ✅ Expo SDK 52 + React Native 0.76 스캐폴드
-- ✅ 게임 로직 (만족도·주사위·카드 선별·세션 상태) TDD 구현
-- ✅ 카드 스와이프 UI + 4명 캐릭터 만족도 프레임
-- ✅ 세션 플레이 + 요약 화면
+- ✅ Plan 1: Core Loop Prototype
+- ✅ 캠페인 구조 (10세션) + 세션 3단계 페이스 (opening/main/ending)
+- ✅ 주사위 롤 선택지 (d20 bucket, 크리/펌블 연출)
+- ✅ DM Screen 3슬롯 (Retcon / Cool Ruling / NPC Cameo)
+- ✅ 엔딩 판정 (배드 4 + 굿 4) + 우선순위 매칭
+- ✅ 캐릭터 XP·마일스톤·해금 (바드 3엔딩, 드루이드 5엔딩)
+- ✅ 파티 편성 / 캠페인 인트로 / 엔딩 / 컬렉션 화면
+- ✅ 12장 신규 카드 (주사위·바드·드루이드·heavy)
 - ⏳ Android 실기기/에뮬레이터 스모크 테스트 (수동 검증 필요)
+
+**Tests**: 10 suites / 52 tests · TypeScript strict pass.
 
 ## Stack
 
 - **Runtime**: Expo SDK 52, React Native 0.76, Expo Router
 - **Language**: TypeScript (strict, noUncheckedIndexedAccess)
-- **State**: Zustand
-- **Animation / Gesture**: React Native Reanimated 3 + Gesture Handler
+- **State**: Zustand (gameStore + campaignStore + profileStore)
+- **Animation**: React Native Reanimated 3 + Gesture Handler
 - **Test**: Jest (`jest-expo` preset) + `@testing-library/react-native`
 
 ## Package
@@ -43,42 +49,58 @@ npm run android         # open in Android emulator / attached device
 npm start               # print QR code; scan with Expo Go app
 
 # 3. Run tests
-npm test                # 21 tests across 5 suites
+npm test                # 52 tests across 10 suites
 npm run typecheck       # tsc --noEmit
 ```
 
 ## Project Layout
 
 ```
-app/                         Expo Router screens
-  _layout.tsx                Stack navigator
-  index.tsx                  Home
-  session.tsx                Main play screen (table-top view)
-  session-summary.tsx        End-of-session result
+app/                              Expo Router screens
+  index.tsx                       Home (start campaign / collection / ledger)
+  session.tsx                     Active session (table + card + DM screen + dice)
+  session-summary.tsx             End-of-session result + next session
+  campaign/
+    new.tsx                       Party formation (4-pick from unlocked)
+    intro.tsx                     Campaign intro before each session
+    ending.tsx                    Campaign ending reveal + rewards
+  collection/
+    characters.tsx                Character roster + XP / milestones
+    endings.tsx                   Ending dex (8 endings)
 src/
   features/
     session/
-      engine/                Pure game logic (satisfaction, cardSelector)
-      components/            SatisfactionBar, CharacterFrame, CardView, SwipeableCard
-    dice/                    Seedable d-sided roller
+      engine/                     Pure game logic
+        satisfaction.ts           applyEffects + clampSatisfaction
+        cardSelector.ts           phase-aware weighted random
+        phaseEngine.ts            opening/main/ending pacing
+        diceResolver.ts           dice choice resolution
+      components/                 SatisfactionBar, CharacterFrame, CardView,
+                                  SwipeableCard, DmScreenPanel, DiceRollOverlay
+    campaign/
+      engine/
+        endingResolver.ts         priority-based ending matching
+        progressionEngine.ts      XP, milestones, unlocks
+    dice/
+      roller.ts                   Seedable mulberry32 PRNG
   shared/
-    types/                   Card, PlayerCharacter, SessionState
-    stores/                  Zustand game store
-  content/                   Seed JSON (characters, cards) — replaced by Supabase in Plan 3
+    types/                        Card, PlayerCharacter, SessionState,
+                                  CampaignState, Ending, CharacterProgress
+    stores/                       gameStore, campaignStore, profileStore
+  content/                        characters.json, cards.json, endings.json
+                                  (replaced by Supabase in Plan 3)
 tests/
-  engine/                    Pure function tests
-  stores/                    Store behavior tests
+  engine/                         5 engine test suites
+  stores/                         2 store test suites
 docs/superpowers/
-  specs/                     Design docs
-  plans/                     Implementation plans per phase
+  specs/                          Design docs
+  plans/                          Implementation plans
 ```
 
 ## What's Next
 
-See `docs/superpowers/plans/` for subsequent plans:
-- **Plan 2**: Full game loop (campaigns, endings, dice UI, DM screen)
 - **Plan 3**: Supabase + i18n (cloud save, KO/EN runtime switch)
-- **Plan 4**: Content production (365 cards + 42 pixel sprites)
+- **Plan 4**: Content production (365 cards + pixel art)
 - **Plan 5**: Monetization + analytics + OTA
 - **Plan 6**: QA + release to Google Play
 

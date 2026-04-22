@@ -6,6 +6,8 @@ export default function RootLayout() {
       <Stack.Screen name="index" />
       <Stack.Screen name="session" />
       <Stack.Screen name="session-summary" />
+      <Stack.Screen name="campaign" />
+      <Stack.Screen name="collection" />
     </Stack>
   );
 }
