@@ -401,5 +401,348 @@
       { "direction": "right", "labelKo": "서술로",     "labelEn": "Just describe",  "effects": [{ "target": "wizard", "delta": 1 }, { "target": "rogue", "delta": -1 }] }
     ],
     "weight": 6, "cooldown": 7, "tags": ["npc"]
+  },
+  {
+    "id": "if_001_tavern_rumor",
+    "category": "spotlight",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "여관 주인이 맥주를 내려놓으며 은밀히 말한다: \"북쪽 산맥에서 이상한 불빛이 보였다는 얘기가 있습니다...\"",
+    "promptEn": "The innkeeper sets down a mug and whispers: \"Strange lights have been seen in the northern mountains...\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "귀기울인다",     "labelEn": "Listen closely",  "effects": [{ "target": "wizard", "delta": 2 }, { "target": "cleric", "delta": 1 }] },
+      { "direction": "right", "labelKo": "무시하고 마신다", "labelEn": "Ignore and drink", "effects": [{ "target": "fighter", "delta": 1 }, { "target": "wizard", "delta": -1 }] }
+    ],
+    "weight": 6, "cooldown": 8, "tags": ["tavern", "npc", "investigation", "opening"]
+  },
+  {
+    "id": "if_002_survivor",
+    "category": "spotlight",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "폐허 가운데 떨리는 여인이 있다. 가족을 잃고 말을 제대로 잇지 못한다. 파티가 어떻게 접근할지 결정해야 한다.",
+    "promptEn": "Amid the ruins, a trembling woman has lost her family and can barely speak. How does the party approach her?",
+    "choices": [
+      { "direction": "left",  "labelKo": "클레릭이 위로",     "labelEn": "Cleric comforts",    "effects": [{ "target": "cleric", "delta": 3 }, { "target": "all", "delta": 1 }] },
+      { "direction": "right", "labelKo": "바로 질문 시작",   "labelEn": "Interrogate quickly", "effects": [{ "target": "rogue", "delta": 1 }, { "target": "cleric", "delta": -2 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["npc", "investigation", "village", "drama"]
+  },
+  {
+    "id": "if_003_dungeon_entry",
+    "category": "improv_ruling",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "동굴 입구. 안에서 습한 공기와 금속 긁히는 소리가 새어 나온다. 어떻게 진입할 것인가?",
+    "promptEn": "A cave entrance. Damp air and a scraping metallic sound drift out. How does the party enter?",
+    "choices": [
+      { "direction": "left",  "labelKo": "도적이 정찰",      "labelEn": "Rogue scouts",     "effects": [{ "target": "rogue", "delta": 2 }, { "target": "fighter", "delta": -1 }] },
+      { "direction": "right", "labelKo": "모두 함께 진입",   "labelEn": "All enter together", "effects": [{ "target": "fighter", "delta": 2 }, { "target": "cleric", "delta": 1 }] }
+    ],
+    "weight": 6, "cooldown": 7, "tags": ["dungeon", "exploration"]
+  },
+  {
+    "id": "if_004_goblin_ambush",
+    "category": "improv_ruling",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "모퉁이에서 고블린 4마리가 튀어나온다! 전사가 앞서 돌진하려 한다.",
+    "promptEn": "Four goblins burst from the corner! The Fighter lunges ahead.",
+    "choices": [
+      { "direction": "left",  "labelKo": "돌진 허용",     "labelEn": "Let Fighter charge", "effects": [{ "target": "fighter", "delta": 3 }, { "target": "wizard", "delta": -1 }] },
+      { "direction": "right", "labelKo": "대형 정렬",     "labelEn": "Form ranks",         "effects": [{ "target": "wizard", "delta": 2 }, { "target": "cleric", "delta": 2 }, { "target": "fighter", "delta": -1 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["combat", "dungeon"]
+  },
+  {
+    "id": "if_005_treasure_chest",
+    "category": "player_nonsense",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "방 중앙에 화려한 상자. 도적이 함정 감지를 건너뛰고 바로 열려 한다.",
+    "promptEn": "An ornate chest in the middle of the room. The Rogue wants to open it — skipping trap detection.",
+    "choices": [
+      { "direction": "left",  "labelKo": "제지한다",      "labelEn": "Stop them",       "effects": [{ "target": "wizard", "delta": 2 }, { "target": "rogue", "delta": -2 }] },
+      { "direction": "right", "labelKo": "허용",          "labelEn": "Allow",           "effects": [{ "target": "rogue", "delta": 3 }, { "target": "cleric", "delta": -1 }] }
+    ],
+    "weight": 6, "cooldown": 8, "tags": ["dungeon", "exploration"]
+  },
+  {
+    "id": "if_006_stone_tablet",
+    "category": "improv_ruling",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "고대어로 적힌 석판. 마법사가 해독을 시도한다.",
+    "promptEn": "A stone tablet in ancient script. The Wizard attempts to translate.",
+    "choices": [
+      {
+        "direction": "left",
+        "labelKo": "🎲 해독 판정",
+        "labelEn": "🎲 Translation check",
+        "dice": {
+          "sides": 20,
+          "buckets": [
+            { "min": 1,  "max": 1,  "effects": [{ "target": "wizard", "delta": -4 }, { "target": "others", "delta": -1 }], "flavorKo": "대실패, 잘못 해석" },
+            { "min": 2,  "max": 10, "effects": [{ "target": "wizard", "delta": -1 }] },
+            { "min": 11, "max": 19, "effects": [{ "target": "wizard", "delta": 2 }, { "target": "all", "delta": 1 }] },
+            { "min": 20, "max": 20, "effects": [{ "target": "wizard", "delta": 5 }, { "target": "all", "delta": 2 }], "flavorKo": "완벽한 해독" }
+          ]
+        }
+      },
+      {
+        "direction": "right",
+        "labelKo": "건너뛴다",
+        "labelEn": "Skip",
+        "effects": [{ "target": "wizard", "delta": -2 }]
+      }
+    ],
+    "weight": 5, "cooldown": 12, "tags": ["puzzle", "lore", "investigation"]
+  },
+  {
+    "id": "if_007_campfire",
+    "category": "spotlight",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "모닥불 주변. 조용한 밤. 각자 다른 생각을 하고 있다.",
+    "promptEn": "Around the campfire. A quiet night. Each has their own thoughts.",
+    "choices": [
+      { "direction": "left",  "labelKo": "과거 이야기 유도", "labelEn": "Share pasts",  "effects": [{ "target": "rogue", "delta": 2 }, { "target": "cleric", "delta": 1 }] },
+      { "direction": "right", "labelKo": "경비 순번",      "labelEn": "Set watches",   "effects": [{ "target": "fighter", "delta": 2 }, { "target": "wizard", "delta": 1 }] }
+    ],
+    "weight": 6, "cooldown": 8, "tags": ["camp", "rest", "wilderness"]
+  },
+  {
+    "id": "if_008_wilderness_river",
+    "category": "improv_ruling",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "급류의 강. 건너야 하는데 다리는 없다. 상류에 통나무가 보인다.",
+    "promptEn": "A rushing river, no bridge. A log is visible upstream.",
+    "choices": [
+      { "direction": "left",  "labelKo": "헤엄쳐 건넌다", "labelEn": "Swim across",    "effects": [{ "target": "fighter", "delta": 2 }, { "target": "wizard", "delta": -2 }] },
+      { "direction": "right", "labelKo": "통나무로 다리", "labelEn": "Make a log bridge", "effects": [{ "target": "wizard", "delta": 2 }, { "target": "fighter", "delta": -1 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["wilderness", "exploration"]
+  },
+  {
+    "id": "if_009_wyvern",
+    "category": "improv_ruling",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "하늘에서 와이번이 급강하한다! 회피할 시간이 없다.",
+    "promptEn": "A wyvern swoops down from the sky! No time to evade.",
+    "choices": [
+      { "direction": "left",  "labelKo": "맞선다",        "labelEn": "Stand ground",  "effects": [{ "target": "fighter", "delta": 3 }, { "target": "cleric", "delta": -2 }] },
+      { "direction": "right", "labelKo": "숨어서 기다림",   "labelEn": "Hide and wait",  "effects": [{ "target": "rogue", "delta": 2 }, { "target": "fighter", "delta": -2 }] }
+    ],
+    "weight": 4, "cooldown": 15, "tags": ["combat", "wilderness", "drama"]
+  },
+  {
+    "id": "if_010_lair_entrance",
+    "category": "improv_ruling",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "용의 둥지 입구. 용암 사이를 지나야 한다. 화약통을 던져 다리를 만들까, 우회로를 찾을까?",
+    "promptEn": "Dragon's lair entrance. Must cross lava. Detonate barrels for a bridge, or find a detour?",
+    "choices": [
+      { "direction": "left",  "labelKo": "화약 폭발",     "labelEn": "Blow the barrels", "effects": [{ "target": "fighter", "delta": 3 }, { "target": "wizard", "delta": -1 }] },
+      { "direction": "right", "labelKo": "우회로 탐색",   "labelEn": "Find detour",      "effects": [{ "target": "rogue", "delta": 2 }, { "target": "cleric", "delta": 1 }] }
+    ],
+    "weight": 3, "cooldown": 20, "tags": ["dungeon", "drama", "boss"]
+  },
+  {
+    "id": "if_011_dragon_roars",
+    "category": "meta_break",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "붉은 용이 포효하며 나타난다! 어떤 선제행동을 할까?",
+    "promptEn": "The red dragon roars into view! What's the opening move?",
+    "choices": [
+      { "direction": "left",  "labelKo": "전사 돌격 허용", "labelEn": "Fighter charges",  "effects": [{ "target": "fighter", "delta": 3 }, { "target": "all", "delta": 1 }] },
+      { "direction": "right", "labelKo": "마법 선제공격",  "labelEn": "Wizard casts first", "effects": [{ "target": "wizard", "delta": 3 }, { "target": "all", "delta": 1 }] }
+    ],
+    "weight": 3, "cooldown": 25, "tags": ["boss", "combat", "drama"]
+  },
+  {
+    "id": "if_012_manor_door",
+    "category": "improv_ruling",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "저택의 문이 저절로 열린다. 안에는 복도가 어둡다. 전조등은 가지고 있나?",
+    "promptEn": "The manor door swings open on its own. Darkness within. Do we have a light?",
+    "choices": [
+      { "direction": "left",  "labelKo": "횃불 준비 후 진입", "labelEn": "Light torches",   "effects": [{ "target": "wizard", "delta": 2 }, { "target": "fighter", "delta": 1 }] },
+      { "direction": "right", "labelKo": "어둠 속 진입",     "labelEn": "Enter in the dark", "effects": [{ "target": "rogue", "delta": 2 }, { "target": "cleric", "delta": -2 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["horror", "exploration", "creepy"]
+  },
+  {
+    "id": "if_013_child_wail",
+    "category": "spotlight",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "복도 끝에서 아이의 울음소리. 가까이 가면 사라진다. 클레릭이 사자의 평화 의식을 제안한다.",
+    "promptEn": "A child's wail at the corridor's end. It vanishes when approached. The Cleric suggests a rite for the dead.",
+    "choices": [
+      { "direction": "left",  "labelKo": "의식 허용",     "labelEn": "Allow the rite",   "effects": [{ "target": "cleric", "delta": 3 }, { "target": "all", "delta": 1 }] },
+      { "direction": "right", "labelKo": "계속 전진",     "labelEn": "Press on",        "effects": [{ "target": "fighter", "delta": 1 }, { "target": "cleric", "delta": -2 }] }
+    ],
+    "weight": 4, "cooldown": 12, "tags": ["horror", "npc", "mystery"]
+  },
+  {
+    "id": "if_014_diary",
+    "category": "improv_ruling",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "서재에서 30년 전 가족의 일기장을 발견. 누군가 저주를 걸었다는 기록.",
+    "promptEn": "In the study, a 30-year-old family diary reveals a curse was cast by someone.",
+    "choices": [
+      { "direction": "left",  "labelKo": "상세히 읽는다",  "labelEn": "Read carefully",   "effects": [{ "target": "wizard", "delta": 2 }, { "target": "cleric", "delta": 1 }] },
+      { "direction": "right", "labelKo": "챙기고 떠난다",  "labelEn": "Take it and leave", "effects": [{ "target": "rogue", "delta": 1 }, { "target": "wizard", "delta": -1 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["lore", "puzzle", "investigation"]
+  },
+  {
+    "id": "if_015_basement_door",
+    "category": "improv_ruling",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "잠긴 지하실 문. 안에서 희미한 속삭임이 들린다.",
+    "promptEn": "A locked basement door. Faint whispers from within.",
+    "choices": [
+      { "direction": "left",  "labelKo": "도적이 자물쇠 해제", "labelEn": "Rogue picks lock", "effects": [{ "target": "rogue", "delta": 2 }, { "target": "wizard", "delta": 1 }] },
+      { "direction": "right", "labelKo": "힘으로 돌파",      "labelEn": "Force the door",   "effects": [{ "target": "fighter", "delta": 2 }, { "target": "rogue", "delta": -1 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["horror", "dungeon", "exploration"]
+  },
+  {
+    "id": "if_016_ghost_revealed",
+    "category": "spotlight",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "유령이 모습을 드러낸다: \"저는 30년 전 살해당한 부인입니다. 제 복수를 도와주세요.\"",
+    "promptEn": "The ghost reveals herself: \"I am the wife, murdered 30 years ago. Help me avenge.\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "복수를 돕는다",  "labelEn": "Aid her revenge",  "effects": [{ "target": "rogue", "delta": 3 }, { "target": "cleric", "delta": -2 }] },
+      { "direction": "right", "labelKo": "퇴치를 시도",     "labelEn": "Attempt exorcism", "effects": [{ "target": "cleric", "delta": 3 }, { "target": "rogue", "delta": -2 }] }
+    ],
+    "weight": 3, "cooldown": 20, "tags": ["drama", "moral", "npc", "boss"]
+  },
+  {
+    "id": "if_017_refugee",
+    "category": "spotlight",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "피난민 무리가 길을 막는다: \"제발 저희 아이들을 데려가 주세요!\"",
+    "promptEn": "Refugees block the path: \"Please, take our children!\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "아이들 보호",   "labelEn": "Protect children",  "effects": [{ "target": "cleric", "delta": 3 }, { "target": "fighter", "delta": 1 }] },
+      { "direction": "right", "labelKo": "돌아서 지나감", "labelEn": "Move past them",    "effects": [{ "target": "fighter", "delta": 1 }, { "target": "cleric", "delta": -3 }] }
+    ],
+    "weight": 4, "cooldown": 12, "tags": ["npc", "drama", "moral", "opening"]
+  },
+  {
+    "id": "if_018_ruined_village",
+    "category": "spotlight",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "파괴된 마을. 집 잔해 속 단서를 찾을까, 생존자를 찾을까?",
+    "promptEn": "Ruined village. Search the rubble for clues, or look for survivors?",
+    "choices": [
+      { "direction": "left",  "labelKo": "단서 수색",     "labelEn": "Search for clues",   "effects": [{ "target": "rogue", "delta": 2 }, { "target": "wizard", "delta": 1 }] },
+      { "direction": "right", "labelKo": "생존자 탐색",   "labelEn": "Look for survivors", "effects": [{ "target": "cleric", "delta": 3 }, { "target": "rogue", "delta": -1 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["investigation", "horror", "village", "exploration"]
+  },
+  {
+    "id": "if_019_forbidden_book",
+    "category": "improv_ruling",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "마을 교회에서 금지된 네크로맨서의 서가 발견된다. 마법사가 열어보려 한다.",
+    "promptEn": "A forbidden necromancer's tome is found in the village church. The Wizard moves to open it.",
+    "choices": [
+      { "direction": "left",  "labelKo": "열게 한다",     "labelEn": "Let them open",     "effects": [{ "target": "wizard", "delta": 3 }, { "target": "cleric", "delta": -2 }] },
+      { "direction": "right", "labelKo": "봉인한 채 들고감", "labelEn": "Keep it sealed",  "effects": [{ "target": "cleric", "delta": 2 }, { "target": "wizard", "delta": -1 }] }
+    ],
+    "weight": 4, "cooldown": 12, "tags": ["lore", "puzzle", "dungeon"]
+  },
+  {
+    "id": "if_020_graveyard",
+    "category": "improv_ruling",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "묘지 안에서 움직이는 시체 6구가 일어난다. 전사가 맞서려 한다.",
+    "promptEn": "In the graveyard, 6 walking corpses rise. The Fighter advances to fight.",
+    "choices": [
+      { "direction": "left",  "labelKo": "정면 돌파",     "labelEn": "Frontal assault",    "effects": [{ "target": "fighter", "delta": 3 }, { "target": "cleric", "delta": -1 }] },
+      { "direction": "right", "labelKo": "클레릭 정화술", "labelEn": "Cleric's turn undead", "effects": [{ "target": "cleric", "delta": 3 }, { "target": "fighter", "delta": -1 }] }
+    ],
+    "weight": 4, "cooldown": 15, "tags": ["combat", "horror", "dungeon"]
+  },
+  {
+    "id": "if_021_scholar",
+    "category": "spotlight",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "도서관의 노학자가 정보를 제공한다. 그 대가로 오래된 마법 아이템을 요구한다.",
+    "promptEn": "An old scholar at the library offers information — for an old magical item in return.",
+    "choices": [
+      { "direction": "left",  "labelKo": "거래 수락",     "labelEn": "Accept deal",      "effects": [{ "target": "wizard", "delta": 2 }, { "target": "cleric", "delta": 1 }] },
+      { "direction": "right", "labelKo": "정보만 압박",   "labelEn": "Pressure for info", "effects": [{ "target": "rogue", "delta": 2 }, { "target": "wizard", "delta": -1 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["lore", "npc", "investigation"]
+  },
+  {
+    "id": "if_022_knight_alliance",
+    "category": "spotlight",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "왕국 기사단장이 연합을 제안한다. 지휘권은 누가 가질 것인가?",
+    "promptEn": "The knight captain proposes an alliance. Who will command?",
+    "choices": [
+      { "direction": "left",  "labelKo": "기사단에 맡김",  "labelEn": "Yield to knights",   "effects": [{ "target": "cleric", "delta": 2 }, { "target": "fighter", "delta": 1 }] },
+      { "direction": "right", "labelKo": "파티가 지휘",    "labelEn": "Party commands",    "effects": [{ "target": "fighter", "delta": 3 }, { "target": "cleric", "delta": -1 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["npc", "planning", "tavern"]
+  },
+  {
+    "id": "if_023_evacuation",
+    "category": "spotlight",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "언데드 군대가 접근 중. 시민 대피와 전투 준비 중 어느 쪽이 우선인가?",
+    "promptEn": "Undead army closes in. Civilian evacuation or battle preparation — which first?",
+    "choices": [
+      { "direction": "left",  "labelKo": "대피 우선",     "labelEn": "Evacuate first",   "effects": [{ "target": "cleric", "delta": 3 }, { "target": "fighter", "delta": -2 }] },
+      { "direction": "right", "labelKo": "전투 준비",     "labelEn": "Prepare battle",   "effects": [{ "target": "fighter", "delta": 2 }, { "target": "cleric", "delta": -3 }] }
+    ],
+    "weight": 4, "cooldown": 12, "tags": ["combat", "drama", "moral"]
+  },
+  {
+    "id": "if_024_lich_showdown",
+    "category": "meta_break",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "리치 네크로맨서가 썩은 미소로 인사한다: \"너희는 이미 늦었다. 내 군주는 깨어나고 있어.\"",
+    "promptEn": "The lich necromancer smiles with rotted teeth: \"You're too late. My lord awakens.\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "즉시 공격",     "labelEn": "Attack immediately", "effects": [{ "target": "fighter", "delta": 3 }, { "target": "wizard", "delta": 1 }] },
+      { "direction": "right", "labelKo": "대화로 시간벌기", "labelEn": "Stall with talk",   "effects": [{ "target": "rogue", "delta": 2 }, { "target": "cleric", "delta": 1 }] }
+    ],
+    "weight": 3, "cooldown": 25, "tags": ["boss", "combat", "drama"]
+  },
+  {
+    "id": "if_025_epilogue_toast",
+    "category": "spotlight",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "여관에서 마지막 건배. 모험이 끝났다. 어떤 이야기를 남길까?",
+    "promptEn": "A final toast at the tavern. The adventure is over. What will you remember?",
+    "choices": [
+      { "direction": "left",  "labelKo": "영웅담 공유",   "labelEn": "Share heroic tales", "effects": [{ "target": "fighter", "delta": 2 }, { "target": "rogue", "delta": 1 }] },
+      { "direction": "right", "labelKo": "다음 모험 계획", "labelEn": "Plan next adventure", "effects": [{ "target": "all", "delta": 2 }] }
+    ],
+    "weight": 7, "cooldown": 6, "tags": ["epilogue", "tavern", "rest"]
   }
 ]

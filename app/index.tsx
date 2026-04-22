@@ -19,7 +19,7 @@ export default function Home() {
             <Text style={styles.buttonText}>이어하기 (세션 {campaign!.sessionIndex})</Text>
           </Pressable>
         )}
-        <Pressable style={styles.button} onPress={() => router.push('/campaign/new')}>
+        <Pressable style={styles.button} onPress={() => router.push('/campaign/scenarios' as any)}>
           <Text style={styles.buttonText}>새 캠페인</Text>
         </Pressable>
         <Pressable style={styles.secondary} onPress={() => router.push('/collection/characters')}>

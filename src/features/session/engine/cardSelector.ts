@@ -12,7 +12,10 @@ export type CardSelectionContext = {
   roller: DiceRoller;
   sessionIndex?: number;
   phase?: SessionPhase;
+  themeTags?: string[];
 };
+
+const THEME_TAG_BONUS = 2.5;
 
 function isEligible(card: Card, ctx: CardSelectionContext): boolean {
   const sessionIndex = ctx.sessionIndex ?? 1;
@@ -38,11 +41,17 @@ function isEligible(card: Card, ctx: CardSelectionContext): boolean {
   return true;
 }
 
+function themeMultiplier(card: Card, themeTags: string[] | undefined): number {
+  if (!themeTags || themeTags.length === 0) return 1;
+  const hit = card.tags.some(t => themeTags.includes(t));
+  return hit ? THEME_TAG_BONUS : 1;
+}
+
 function effectiveWeight(card: Card, ctx: CardSelectionContext): number {
   const phase = ctx.phase ?? 'main';
   const phaseMultiplier = dramaWeightFor(card.dramaLevel, phase);
-  if (phaseMultiplier === 0) return 0.01;
-  return card.weight * (phaseMultiplier * 3);
+  const base = phaseMultiplier === 0 ? 0.01 : card.weight * (phaseMultiplier * 3);
+  return base * themeMultiplier(card, ctx.themeTags);
 }
 
 function weightedPick(candidates: Card[], ctx: CardSelectionContext): Card {

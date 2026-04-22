@@ -1,0 +1,269 @@
+[
+  {
+    "id": "dragon_return",
+    "nameKo": "용의 귀환",
+    "nameEn": "The Dragon's Return",
+    "summaryKo": "천 년간 잠들어 있던 붉은 용이 깨어났다. 작은 왕국은 위기에 처했고, 한 의뢰인이 파티에 용 퇴치를 제안한다.",
+    "summaryEn": "A red dragon slumbering for a thousand years has awakened. A small kingdom is in crisis, and a client approaches the party to slay it.",
+    "sessionThemes": [
+      {
+        "sessionIndex": 1,
+        "themeKo": "여관에서의 만남",
+        "themeEn": "Tavern Meeting",
+        "narrativeKo": "네 명의 모험가가 여관에서 처음 만난다. 한 노인이 다가와 용 퇴치 의뢰를 제안한다.",
+        "narrativeEn": "Four adventurers meet at a tavern. An old man approaches with a dragon-slaying contract.",
+        "cardTags": ["npc", "tavern", "opening"]
+      },
+      {
+        "sessionIndex": 2,
+        "themeKo": "마을의 흔적",
+        "themeEn": "Village Traces",
+        "narrativeKo": "파티는 용이 최근에 습격한 마을로 향한다. 생존자들의 증언을 수집해야 한다.",
+        "narrativeEn": "The party heads to a village recently raided by the dragon. Survivors' testimonies must be gathered.",
+        "cardTags": ["investigation", "npc", "village"]
+      },
+      {
+        "sessionIndex": 3,
+        "themeKo": "첫 던전",
+        "themeEn": "First Dungeon",
+        "narrativeKo": "용의 부하로 추정되는 고블린 무리의 소굴을 발견한다. 탐험이 시작된다.",
+        "narrativeEn": "The party finds a goblin lair — likely dragon cultists. Exploration begins.",
+        "cardTags": ["dungeon", "combat", "exploration"]
+      },
+      {
+        "sessionIndex": 4,
+        "themeKo": "수수께끼의 단서",
+        "themeEn": "Mysterious Clue",
+        "narrativeKo": "던전 깊은 곳에서 고대 드래곤어로 적힌 석판을 발견한다. 파티 중 누군가 해독해야 한다.",
+        "narrativeEn": "Deep in the dungeon, a stone tablet written in ancient Draconic awaits translation.",
+        "cardTags": ["puzzle", "lore", "investigation"]
+      },
+      {
+        "sessionIndex": 5,
+        "themeKo": "황야의 위험",
+        "themeEn": "Wilderness Perils",
+        "narrativeKo": "용의 둥지로 향하는 황야 여정. 야영지를 찾고, 자연의 위협에 대비해야 한다.",
+        "narrativeEn": "A wilderness journey toward the dragon's lair. The party must camp and prepare for nature's dangers.",
+        "cardTags": ["wilderness", "camp", "exploration"]
+      },
+      {
+        "sessionIndex": 6,
+        "themeKo": "용의 하수인",
+        "themeEn": "Dragon's Minion",
+        "narrativeKo": "용의 정예 부하인 와이번을 조우한다. 싸우거나, 협상하거나, 회피할 수 있다.",
+        "narrativeEn": "The party encounters a wyvern — the dragon's elite minion. Fight, negotiate, or evade.",
+        "cardTags": ["combat", "npc", "wilderness"]
+      },
+      {
+        "sessionIndex": 7,
+        "themeKo": "마지막 준비",
+        "themeEn": "Final Preparations",
+        "narrativeKo": "용의 둥지 앞에 도착. 파티는 각자 장비를 점검하고, 작전을 짜야 한다.",
+        "narrativeEn": "The party arrives at the dragon's lair. Each member checks their gear and plans the assault.",
+        "cardTags": ["rest", "planning", "npc"]
+      },
+      {
+        "sessionIndex": 8,
+        "themeKo": "용의 둥지",
+        "themeEn": "The Dragon's Lair",
+        "narrativeKo": "둥지 입구. 용암 웅덩이와 보물 더미 사이를 뚫고 들어가야 한다.",
+        "narrativeEn": "At the lair entrance. The party must advance through lava pools and treasure piles.",
+        "cardTags": ["dungeon", "combat", "drama"]
+      },
+      {
+        "sessionIndex": 9,
+        "themeKo": "용과의 대결",
+        "themeEn": "Dragon Showdown",
+        "narrativeKo": "붉은 용이 포효하며 나타난다. 최후의 결전이다.",
+        "narrativeEn": "The red dragon roars into view. The final battle begins.",
+        "cardTags": ["boss", "combat", "drama"]
+      },
+      {
+        "sessionIndex": 10,
+        "themeKo": "에필로그",
+        "themeEn": "Epilogue",
+        "narrativeKo": "보물을 정리하고, 왕국에서 환영받는다. 다음 모험은?",
+        "narrativeEn": "Treasure divided, hailed by the kingdom. What's next?",
+        "cardTags": ["epilogue", "tavern", "rest"]
+      }
+    ]
+  },
+  {
+    "id": "haunted_manor",
+    "nameKo": "유령의 저택",
+    "nameEn": "The Haunted Manor",
+    "summaryKo": "외딴 저택에서 30년 전 일가족이 몰살당했다. 새 상속자가 저택에서 실종되자, 파티에 조사 의뢰가 들어온다.",
+    "summaryEn": "A family was slaughtered 30 years ago in a remote manor. When the new heir disappears, the party is hired to investigate.",
+    "sessionThemes": [
+      {
+        "sessionIndex": 1,
+        "themeKo": "의뢰인의 방문",
+        "themeEn": "The Client",
+        "narrativeKo": "창백한 법률가가 실종된 상속자 찾기를 부탁한다. 파티는 저택으로 향한다.",
+        "narrativeEn": "A pale lawyer asks the party to find the missing heir. They head to the manor.",
+        "cardTags": ["npc", "opening", "investigation"]
+      },
+      {
+        "sessionIndex": 2,
+        "themeKo": "저택 도착",
+        "themeEn": "Arrival",
+        "narrativeKo": "음울한 분위기의 저택. 문이 저절로 열린다.",
+        "narrativeEn": "A gloomy manor. The door opens by itself.",
+        "cardTags": ["horror", "exploration", "creepy"]
+      },
+      {
+        "sessionIndex": 3,
+        "themeKo": "첫 유령",
+        "themeEn": "First Ghost",
+        "narrativeKo": "어린 아이의 울음소리가 복도에서 들린다. 나타나면 사라진다.",
+        "narrativeEn": "A child's wail echoes through the hall, appearing and vanishing.",
+        "cardTags": ["horror", "npc", "mystery"]
+      },
+      {
+        "sessionIndex": 4,
+        "themeKo": "일기장 발견",
+        "themeEn": "The Diary",
+        "narrativeKo": "서재에서 30년 전 일가족의 일기를 발견한다. 누군가가 저주를 걸었다.",
+        "narrativeEn": "In the study, a diary from 30 years ago reveals someone placed a curse.",
+        "cardTags": ["lore", "puzzle", "investigation"]
+      },
+      {
+        "sessionIndex": 5,
+        "themeKo": "지하실 탐험",
+        "themeEn": "Basement",
+        "narrativeKo": "잠긴 지하실 문이 발견된다. 안에서 속삭임이 들린다.",
+        "narrativeEn": "A locked basement door is found. Whispers emanate from within.",
+        "cardTags": ["horror", "dungeon", "exploration"]
+      },
+      {
+        "sessionIndex": 6,
+        "themeKo": "귀족의 비밀",
+        "themeEn": "Noble's Secret",
+        "narrativeKo": "원래 주인은 암시장 주술사였다. 실종된 상속자가 저주를 이어받고 있다.",
+        "narrativeEn": "The original owner was a black-market sorcerer. The missing heir inherited the curse.",
+        "cardTags": ["lore", "npc", "mystery"]
+      },
+      {
+        "sessionIndex": 7,
+        "themeKo": "유령의 정체",
+        "themeEn": "Ghost Revealed",
+        "narrativeKo": "유령은 30년 전 살해된 첫 부인이다. 복수를 원한다.",
+        "narrativeEn": "The ghost is the first wife, murdered 30 years ago. She seeks revenge.",
+        "cardTags": ["npc", "drama", "horror"]
+      },
+      {
+        "sessionIndex": 8,
+        "themeKo": "선택의 순간",
+        "themeEn": "The Choice",
+        "narrativeKo": "파티는 유령을 도와 복수할지, 악령으로 규정해 퇴치할지 결정해야 한다.",
+        "narrativeEn": "The party must choose: aid the ghost's revenge, or exorcise it.",
+        "cardTags": ["drama", "moral", "npc"]
+      },
+      {
+        "sessionIndex": 9,
+        "themeKo": "최후의 대결",
+        "themeEn": "Final Confrontation",
+        "narrativeKo": "저택의 핵심에서 저주의 근원과 마주한다. 상속자를 구할 마지막 기회.",
+        "narrativeEn": "At the manor's heart, the curse's source awaits. Last chance to save the heir.",
+        "cardTags": ["boss", "horror", "drama"]
+      },
+      {
+        "sessionIndex": 10,
+        "themeKo": "저택의 평화",
+        "themeEn": "Peace Restored",
+        "narrativeKo": "저택은 조용해졌다. 새벽 햇살이 창문을 뚫고 들어온다.",
+        "narrativeEn": "The manor is quiet. Dawn light streams through the windows.",
+        "cardTags": ["epilogue", "rest"]
+      }
+    ]
+  },
+  {
+    "id": "undead_rising",
+    "nameKo": "언데드 봉기",
+    "nameEn": "The Undead Rising",
+    "summaryKo": "국경의 작은 마을에서 죽은 자들이 일어나기 시작했다. 파티는 원인을 찾아 네크로맨서와 맞서야 한다.",
+    "summaryEn": "The dead are rising in a border village. The party must find the cause and confront the necromancer.",
+    "sessionThemes": [
+      {
+        "sessionIndex": 1,
+        "themeKo": "첫 경고",
+        "themeEn": "First Warning",
+        "narrativeKo": "피난민이 마을에 도착한다. \"죽은 자들이 일어났어요.\"",
+        "narrativeEn": "Refugees arrive: \"The dead have risen.\"",
+        "cardTags": ["npc", "opening", "investigation"]
+      },
+      {
+        "sessionIndex": 2,
+        "themeKo": "습격당한 마을",
+        "themeEn": "Raided Village",
+        "narrativeKo": "파괴된 마을에 도착. 생존자는 없다. 단서만 남아있다.",
+        "narrativeEn": "A ruined village, no survivors, only clues.",
+        "cardTags": ["investigation", "horror", "exploration"]
+      },
+      {
+        "sessionIndex": 3,
+        "themeKo": "죽은 자의 서",
+        "themeEn": "Book of the Dead",
+        "narrativeKo": "마을 교회에서 금지된 책이 발견된다. 네크로맨서의 흔적이다.",
+        "narrativeEn": "A forbidden book is found in the village church — necromantic traces.",
+        "cardTags": ["lore", "puzzle", "dungeon"]
+      },
+      {
+        "sessionIndex": 4,
+        "themeKo": "묘지의 탐험",
+        "themeEn": "Graveyard",
+        "narrativeKo": "오래된 묘지. 무덤들이 파헤쳐져 있다. 움직이는 시체들과 조우.",
+        "narrativeEn": "An old graveyard, graves dug up. The party encounters the moving dead.",
+        "cardTags": ["combat", "horror", "dungeon"]
+      },
+      {
+        "sessionIndex": 5,
+        "themeKo": "네크로맨서의 이름",
+        "themeEn": "The Necromancer's Name",
+        "narrativeKo": "도서관의 학자가 네크로맨서의 정체를 알려준다. 고대 왕의 제자다.",
+        "narrativeEn": "A scholar at the library reveals the necromancer's identity — a disciple of an ancient king.",
+        "cardTags": ["lore", "npc", "investigation"]
+      },
+      {
+        "sessionIndex": 6,
+        "themeKo": "연합군 규합",
+        "themeEn": "Rallying Allies",
+        "narrativeKo": "왕국의 기사단과 연합한다. 대규모 전투가 다가오고 있다.",
+        "narrativeEn": "The party allies with the kingdom's knights. A larger battle looms.",
+        "cardTags": ["npc", "planning", "tavern"]
+      },
+      {
+        "sessionIndex": 7,
+        "themeKo": "언데드 진격",
+        "themeEn": "Undead March",
+        "narrativeKo": "언데드 군대가 진격한다. 민간인을 먼저 대피시켜야 한다.",
+        "narrativeEn": "The undead army marches. Civilians must evacuate first.",
+        "cardTags": ["combat", "drama", "moral"]
+      },
+      {
+        "sessionIndex": 8,
+        "themeKo": "전장",
+        "themeEn": "The Battlefield",
+        "narrativeKo": "결전의 시간. 파티는 네크로맨서에게 도달하기 위해 전장을 뚫어야 한다.",
+        "narrativeEn": "The decisive moment. The party must break through to reach the necromancer.",
+        "cardTags": ["combat", "boss", "drama"]
+      },
+      {
+        "sessionIndex": 9,
+        "themeKo": "네크로맨서와의 대결",
+        "themeEn": "Necromancer Showdown",
+        "narrativeKo": "네크로맨서 리치와 맞선다. 그의 언데드 군주로서의 저주를 끊어야 한다.",
+        "narrativeEn": "The party faces the lich necromancer and must sever his undead command.",
+        "cardTags": ["boss", "combat", "drama"]
+      },
+      {
+        "sessionIndex": 10,
+        "themeKo": "새벽의 전사",
+        "themeEn": "Dawn Warriors",
+        "narrativeKo": "죽은 자들이 평온을 찾는다. 왕국이 파티를 영웅으로 기린다.",
+        "narrativeEn": "The dead rest at last. The kingdom hails the party as heroes.",
+        "cardTags": ["epilogue", "rest", "tavern"]
+      }
+    ]
+  }
+]

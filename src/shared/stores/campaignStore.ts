@@ -8,6 +8,7 @@ import type {
   SessionResult,
 } from '@/shared/types/campaign';
 import type { Ending } from '@/shared/types/ending';
+import type { Scenario } from '@/shared/types/scenario';
 import { CAMPAIGN_TOTAL_SESSIONS, DEFAULT_DM_SCREEN } from '@/shared/types/campaign';
 import { TOTAL_CARDS_PER_SESSION } from '@/shared/types/session';
 import { selectNextCard } from '@/features/session/engine/cardSelector';
@@ -18,9 +19,11 @@ import { useProfileStore } from './profileStore';
 import charactersData from '@/content/characters.json';
 import cardsData from '@/content/cards.json';
 import endingsData from '@/content/endings.json';
+import scenariosData from '@/content/scenarios.json';
 
 const cards = cardsData as unknown as Card[];
 const endings = endingsData as unknown as Ending[];
+const scenarios = scenariosData as unknown as Scenario[];
 
 type SessionOutcome = {
   finalSatisfaction: Record<CharacterId, number>;
@@ -32,7 +35,7 @@ type SessionOutcome = {
 
 type CampaignStore = {
   campaign: CampaignState | null;
-  startCampaign: (party: CharacterId[], seed?: number) => void;
+  startCampaign: (scenarioId: string, party: CharacterId[], seed?: number) => void;
   finishCurrentSession: (outcome: SessionOutcome) => void;
   advanceToNextSession: (seed?: number) => void;
   useDmAction: (action: DmAction) => boolean;
@@ -55,13 +58,21 @@ function defaultSatisfactionFor(party: CharacterId[]): Record<CharacterId, numbe
   return base;
 }
 
+function themeTagsFor(scenarioId: string, sessionIndex: number): string[] {
+  const scenario = scenarios.find(s => s.id === scenarioId);
+  const theme = scenario?.sessionThemes.find(t => t.sessionIndex === sessionIndex);
+  return theme?.cardTags ?? [];
+}
+
 function buildInitialSession(
+  scenarioId: string,
   party: CharacterId[],
   sessionIndex: number,
   seed: number,
 ): SessionState {
   const roller = createRoller(seed);
   const satisfaction = defaultSatisfactionFor(party);
+  const themeTags = themeTagsFor(scenarioId, sessionIndex);
   const firstCard = selectNextCard({
     pool: cards,
     party,
@@ -70,6 +81,7 @@ function buildInitialSession(
     roller,
     sessionIndex,
     phase: getPhase(0, TOTAL_CARDS_PER_SESSION),
+    themeTags,
   });
   return {
     sessionIndex,
@@ -87,20 +99,24 @@ function buildInitialSession(
 export const useCampaignStore = create<CampaignStore>((set, get) => ({
   campaign: null,
 
-  startCampaign: (party, seed) => {
+  startCampaign: (scenarioId, party, seed) => {
     if (party.length !== 4) throw new Error('party must be exactly 4 members');
     if (new Set(party).size !== 4) throw new Error('party members must be unique');
+    if (!scenarios.find(s => s.id === scenarioId)) {
+      throw new Error(`unknown scenario: ${scenarioId}`);
+    }
     const id = `cp_${Date.now()}`;
     const finalSeed = seed ?? Date.now();
     set({
       campaign: {
         id,
+        scenarioId,
         party,
         startedAt: Date.now(),
         sessionIndex: 1,
         totalSessions: CAMPAIGN_TOTAL_SESSIONS,
         sessionHistory: [],
-        currentSession: buildInitialSession(party, 1, finalSeed),
+        currentSession: buildInitialSession(scenarioId, party, 1, finalSeed),
         dmScreen: { ...DEFAULT_DM_SCREEN },
         isEnded: false,
         endingId: null,
@@ -163,7 +179,7 @@ export const useCampaignStore = create<CampaignStore>((set, get) => ({
       campaign: {
         ...campaign,
         sessionIndex: nextIndex,
-        currentSession: buildInitialSession(campaign.party, nextIndex, nextSeed),
+        currentSession: buildInitialSession(campaign.scenarioId, campaign.party, nextIndex, nextSeed),
       },
     });
   },

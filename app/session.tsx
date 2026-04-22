@@ -12,10 +12,13 @@ import { DiceRollOverlay } from '@/features/session/components/DiceRollOverlay';
 import { isDiceChoice } from '@/shared/types/card';
 import { resolveDiceChoice, type DiceResolution } from '@/features/session/engine/diceResolver';
 import charactersData from '@/content/characters.json';
+import scenariosData from '@/content/scenarios.json';
 import type { PlayerCharacter, CharacterId } from '@/shared/types/character';
 import type { SwipeDirection } from '@/shared/types/card';
+import type { Scenario } from '@/shared/types/scenario';
 
 const characters = charactersData as unknown as PlayerCharacter[];
+const scenarios = scenariosData as unknown as Scenario[];
 
 function nameOf(id: CharacterId): string {
   return characters.find(c => c.id === id)?.nameKo ?? id;
@@ -77,8 +80,10 @@ export default function SessionScreen() {
   }
 
   const [p1, p2, p3, p4] = session.party;
+  const scenario = campaign ? scenarios.find(s => s.id === campaign.scenarioId) : null;
+  const theme = scenario?.sessionThemes.find(t => t.sessionIndex === session.sessionIndex);
   const sessionLabel = campaign
-    ? `Session ${campaign.sessionIndex}/${campaign.totalSessions} · ${session.phase}`
+    ? `S${campaign.sessionIndex}/${campaign.totalSessions} · ${theme?.themeKo ?? session.phase}`
     : `Session 1 · ${session.phase}`;
 
   const diceSides =

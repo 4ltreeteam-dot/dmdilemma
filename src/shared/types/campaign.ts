@@ -19,6 +19,7 @@ export type SessionResult = {
 
 export type CampaignState = {
   id: string;
+  scenarioId: string;
   party: CharacterId[];
   startedAt: number;
   sessionIndex: number;

@@ -12,7 +12,7 @@ describe('campaignStore', () => {
   });
 
   it('startCampaign creates campaign with chosen party', () => {
-    useCampaignStore.getState().startCampaign(['fighter', 'wizard', 'rogue', 'cleric']);
+    useCampaignStore.getState().startCampaign('dragon_return', ['fighter', 'wizard', 'rogue', 'cleric']);
     const campaign = useCampaignStore.getState().campaign!;
     expect(campaign.party).toHaveLength(4);
     expect(campaign.sessionIndex).toBe(1);
@@ -23,26 +23,26 @@ describe('campaignStore', () => {
   });
 
   it('useDmAction marks retcon as used', () => {
-    useCampaignStore.getState().startCampaign(['fighter', 'wizard', 'rogue', 'cleric']);
+    useCampaignStore.getState().startCampaign('dragon_return', ['fighter', 'wizard', 'rogue', 'cleric']);
     useCampaignStore.getState().useDmAction('retcon');
     expect(useCampaignStore.getState().campaign!.dmScreen.retconUsed).toBe(true);
   });
 
   it('useDmAction decrements coolRulingRemaining', () => {
-    useCampaignStore.getState().startCampaign(['fighter', 'wizard', 'rogue', 'cleric']);
+    useCampaignStore.getState().startCampaign('dragon_return', ['fighter', 'wizard', 'rogue', 'cleric']);
     useCampaignStore.getState().useDmAction('cool_ruling');
     expect(useCampaignStore.getState().campaign!.dmScreen.coolRulingRemaining).toBe(1);
   });
 
   it('rejects dm action when slot exhausted', () => {
-    useCampaignStore.getState().startCampaign(['fighter', 'wizard', 'rogue', 'cleric']);
+    useCampaignStore.getState().startCampaign('dragon_return', ['fighter', 'wizard', 'rogue', 'cleric']);
     useCampaignStore.getState().useDmAction('retcon');
     const ok = useCampaignStore.getState().useDmAction('retcon');
     expect(ok).toBe(false);
   });
 
   it('advanceToNextSession increments sessionIndex', () => {
-    useCampaignStore.getState().startCampaign(['fighter', 'wizard', 'rogue', 'cleric']);
+    useCampaignStore.getState().startCampaign('dragon_return', ['fighter', 'wizard', 'rogue', 'cleric']);
     useCampaignStore.getState().finishCurrentSession({
       finalSatisfaction: { fighter: 70, wizard: 70, rogue: 70, cleric: 70, bard: 0, druid: 0 },
       cardsPlayed: 20,
@@ -55,7 +55,7 @@ describe('campaignStore', () => {
   });
 
   it('ends campaign when a player leaves', () => {
-    useCampaignStore.getState().startCampaign(['fighter', 'wizard', 'rogue', 'cleric']);
+    useCampaignStore.getState().startCampaign('dragon_return', ['fighter', 'wizard', 'rogue', 'cleric']);
     useCampaignStore.getState().finishCurrentSession({
       finalSatisfaction: { fighter: 0, wizard: 70, rogue: 70, cleric: 70, bard: 0, druid: 0 },
       cardsPlayed: 15,
@@ -68,7 +68,7 @@ describe('campaignStore', () => {
   });
 
   it('ends campaign after 10th session completes', () => {
-    useCampaignStore.getState().startCampaign(['fighter', 'wizard', 'rogue', 'cleric']);
+    useCampaignStore.getState().startCampaign('dragon_return', ['fighter', 'wizard', 'rogue', 'cleric']);
     for (let i = 1; i <= 10; i++) {
       useCampaignStore.getState().finishCurrentSession({
         finalSatisfaction: { fighter: 60, wizard: 60, rogue: 60, cleric: 60, bard: 0, druid: 0 },
