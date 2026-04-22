@@ -20,16 +20,22 @@ export function CharacterFrame({ name, satisfaction }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.emoji}>{emojiFor(satisfaction)}</Text>
-      <Text style={styles.name}>{name}</Text>
-      <SatisfactionBar value={satisfaction} />
-      <Text style={styles.value}>{Math.round(satisfaction)}</Text>
+      <View style={styles.info}>
+        <View style={styles.labelRow}>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.value}>{Math.round(satisfaction)}</Text>
+        </View>
+        <SatisfactionBar value={satisfaction} />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { width: 120, alignItems: 'center', padding: 8 },
-  emoji: { fontSize: 36 },
-  name: { color: '#fff', fontSize: 14, marginVertical: 4 },
-  value: { color: '#aaa', fontSize: 11, marginTop: 2 },
+  container: { flexDirection: 'row', alignItems: 'center', width: '48%', paddingHorizontal: 6, paddingVertical: 3 },
+  emoji: { fontSize: 20, marginRight: 6 },
+  info: { flex: 1 },
+  labelRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 2 },
+  name: { color: '#fff', fontSize: 11 },
+  value: { color: '#aaa', fontSize: 10 },
 });

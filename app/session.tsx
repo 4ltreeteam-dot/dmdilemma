@@ -88,7 +88,7 @@ export default function SessionScreen() {
 
   const currentSituation = situations && situationProgress ? situations[situationProgress.situationIndex] : null;
   const situationLabel = currentSituation && situations
-    ? `상황 ${situationProgress!.situationIndex + 1}/${situations.length}`
+    ? `${situationProgress!.situationIndex + 1}/${situations.length}`
     : undefined;
 
   const sessionLabel = campaign
@@ -105,8 +105,11 @@ export default function SessionScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+      <View style={styles.topBar}>
         <Text style={styles.headerText}>{sessionLabel}</Text>
+        <Pressable onPress={() => router.replace('/')}>
+          <Text style={styles.exitText}>홈</Text>
+        </Pressable>
       </View>
       <View style={styles.partyGrid}>
         <View style={styles.partyRow}>
@@ -137,9 +140,6 @@ export default function SessionScreen() {
           <Text style={styles.info}>Session ending...</Text>
         )}
       </View>
-      <Pressable style={styles.exit} onPress={() => router.replace('/')}>
-        <Text style={styles.exitText}>중단하고 홈으로</Text>
-      </Pressable>
       <DiceRollOverlay
         visible={diceVisible}
         resolution={resolution}
@@ -152,12 +152,11 @@ export default function SessionScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#111' },
-  header: { paddingVertical: 6, alignItems: 'center' },
+  topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 4, paddingHorizontal: 12 },
   headerText: { color: '#888', fontSize: 11 },
-  partyGrid: { paddingVertical: 4, borderBottomWidth: 1, borderBottomColor: '#222' },
-  partyRow: { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 2 },
-  cardArea: { flex: 1, justifyContent: 'center' },
+  exitText: { color: '#666', fontSize: 11 },
+  partyGrid: { paddingVertical: 2, borderBottomWidth: 1, borderBottomColor: '#222' },
+  partyRow: { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 1 },
+  cardArea: { flex: 1, paddingHorizontal: 8, paddingVertical: 4 },
   info: { color: '#fff', textAlign: 'center' },
-  exit: { padding: 12, alignItems: 'center' },
-  exitText: { color: '#666', fontSize: 12 },
 });

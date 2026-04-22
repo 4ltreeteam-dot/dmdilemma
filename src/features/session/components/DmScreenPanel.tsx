@@ -56,10 +56,10 @@ export function DmScreenPanel({ state, onAction }: Props) {
 }
 
 const styles = StyleSheet.create({
-  row: { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 8 },
-  slot: { alignItems: 'center', paddingVertical: 6, paddingHorizontal: 8, minWidth: 76, backgroundColor: '#1a1a1a', borderRadius: 8 },
+  row: { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 4, paddingHorizontal: 8 },
+  slot: { flexDirection: 'row', alignItems: 'center', paddingVertical: 4, paddingHorizontal: 10, backgroundColor: '#1a1a1a', borderRadius: 6 },
   disabled: { opacity: 0.35 },
-  icon: { fontSize: 20 },
-  label: { color: '#ddd', fontSize: 10, marginTop: 2 },
-  count: { color: '#7c3', fontSize: 10, marginTop: 2 },
+  icon: { fontSize: 14 },
+  label: { color: '#ddd', fontSize: 10, marginLeft: 4 },
+  count: { color: '#7c3', fontSize: 9, marginLeft: 4 },
 });
