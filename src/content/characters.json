@@ -1,0 +1,42 @@
+[
+  {
+    "id": "fighter",
+    "nameKo": "전사",
+    "nameEn": "Fighter",
+    "archetype": "classic",
+    "defaultSatisfaction": 50,
+    "modifierRules": [
+      { "trigger": "card_category", "condition": "player_nonsense", "effect": 1, "description": "전투 외 헛소리에도 관대" }
+    ]
+  },
+  {
+    "id": "wizard",
+    "nameKo": "마법사",
+    "nameEn": "Wizard",
+    "archetype": "classic",
+    "defaultSatisfaction": 50,
+    "modifierRules": [
+      { "trigger": "card_category", "condition": "rule_dispute", "effect": 1, "description": "룰 분쟁에서 더 예민" }
+    ]
+  },
+  {
+    "id": "rogue",
+    "nameKo": "도적",
+    "nameEn": "Rogue",
+    "archetype": "classic",
+    "defaultSatisfaction": 50,
+    "modifierRules": [
+      { "trigger": "card_category", "condition": "backstory", "effect": 2, "description": "백스토리 파고들기 선호" }
+    ]
+  },
+  {
+    "id": "cleric",
+    "nameKo": "클레릭",
+    "nameEn": "Cleric",
+    "archetype": "classic",
+    "defaultSatisfaction": 50,
+    "modifierRules": [
+      { "trigger": "card_category", "condition": "meta_break", "effect": -1, "description": "메타 브레이크에 불편함" }
+    ]
+  }
+]

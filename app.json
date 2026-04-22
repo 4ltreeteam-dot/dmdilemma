@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "DM Dilemma",
+    "slug": "dm-dilemma",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "dmdilemma",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "plugins": ["expo-router"],
+    "android": {
+      "package": "com.dmdilemma.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#111111"
+      }
+    },
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

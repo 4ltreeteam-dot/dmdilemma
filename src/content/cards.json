@@ -1,0 +1,197 @@
+[
+  {
+    "id": "rd_001_darkvision",
+    "category": "rule_dispute",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "전사: \"드워프는 암시야 있잖아요. 이 방에서 다 보이는 거죠?\" 마법사: \"잠깐, 암시야는 60피트까지고 흑백이에요. 이 방은 80피트인데요.\"",
+    "promptEn": "Fighter: \"Dwarves have Darkvision. I can see everything in this room, right?\" Wizard: \"Wait, it's only 60 feet and monochrome. This room is 80 feet.\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "룰대로",   "labelEn": "By the book",   "effects": [{ "target": "fighter", "delta": -2 }, { "target": "wizard",  "delta": 3 }] },
+      { "direction": "right", "labelKo": "다 보이게", "labelEn": "Rule of Cool",  "effects": [{ "target": "fighter", "delta": 2  }, { "target": "wizard",  "delta": -3 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["rules", "darkvision"]
+  },
+  {
+    "id": "sp_001_edgelord_backstory",
+    "category": "backstory",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "도적: \"제 캐릭터는 고아이고 마피아의 조카이고 예언의 아이입니다. 지금 공개할게요.\"",
+    "promptEn": "Rogue: \"My character is an orphan, the mafia's nephew, AND the chosen one. I'll reveal it now.\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "진지하게 받아주기", "labelEn": "Take it seriously", "effects": [{ "target": "rogue", "delta": 3  }, { "target": "others", "delta": -1 }] },
+      { "direction": "right", "labelKo": "가볍게 넘기기",     "labelEn": "Brush it off",      "effects": [{ "target": "rogue", "delta": -2 }, { "target": "others", "delta": 1  }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["backstory", "spotlight"]
+  },
+  {
+    "id": "pn_001_talk_to_box",
+    "category": "player_nonsense",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "전사가 상자를 여는 대신 \"상자에게 말을 건다\"고 선언한다.",
+    "promptEn": "The Fighter declares they want to \"talk to the box\" instead of opening it.",
+    "choices": [
+      { "direction": "left",  "labelKo": "룰대로 NO",     "labelEn": "Rule it out",       "effects": [{ "target": "fighter", "delta": -1 }] },
+      { "direction": "right", "labelKo": "즉흥 NPC 등장", "labelEn": "Improvise an NPC",  "effects": [{ "target": "fighter", "delta": 2 }, { "target": "wizard", "delta": -1 }] }
+    ],
+    "weight": 7, "cooldown": 8, "tags": ["nonsense"]
+  },
+  {
+    "id": "tm_001_snack",
+    "category": "table_management",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "클레릭: \"잠깐, 배가 고픈데요...\"",
+    "promptEn": "Cleric: \"Wait, I'm hungry...\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "거절",      "labelEn": "Refuse",     "effects": [{ "target": "cleric", "delta": -1 }] },
+      { "direction": "right", "labelKo": "휴식 선언", "labelEn": "Call a break", "effects": [{ "target": "all", "delta": 1 }] }
+    ],
+    "weight": 8, "cooldown": 5, "tags": ["break"]
+  },
+  {
+    "id": "mb_001_plot_armor",
+    "category": "meta_break",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "마법사가 크리티컬 실패로 즉사할 참이다. 마법사: \"제 주인공이잖아요. 진짜 죽일 건가요?\"",
+    "promptEn": "Wizard critfails and would die. Wizard: \"I'm the main character. You'd really kill me?\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "공정한 위험",  "labelEn": "Fair danger", "effects": [{ "target": "wizard", "delta": -3 }, { "target": "cleric", "delta": -2 }] },
+      { "direction": "right", "labelKo": "주인공 보정",  "labelEn": "Plot armor",  "effects": [{ "target": "wizard", "delta": 3  }, { "target": "rogue",  "delta": -2 }] }
+    ],
+    "weight": 3, "cooldown": 15, "tags": ["death", "meta"]
+  },
+  {
+    "id": "sp_002_spotlight_share",
+    "category": "spotlight",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "클레릭이 조용하다. 다른 셋이 대화를 주도한다.",
+    "promptEn": "The Cleric is quiet while the other three dominate.",
+    "choices": [
+      { "direction": "left",  "labelKo": "그대로 둔다",       "labelEn": "Leave it",          "effects": [{ "target": "cleric", "delta": -2 }] },
+      { "direction": "right", "labelKo": "클레릭 향 NPC 등장", "labelEn": "Bring NPC to Cleric", "effects": [{ "target": "cleric", "delta": 3 }, { "target": "rogue", "delta": -1 }] }
+    ],
+    "weight": 6, "cooldown": 7, "tags": ["spotlight"]
+  },
+  {
+    "id": "ir_001_hidden_roll",
+    "category": "improv_ruling",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "도적이 함정 감지 판정. 주사위 결과를 공개할까, 숨길까?",
+    "promptEn": "Rogue rolls for trap detection. Reveal the die or hide it?",
+    "choices": [
+      { "direction": "left",  "labelKo": "공개", "labelEn": "Reveal", "effects": [{ "target": "wizard", "delta": 1 }, { "target": "rogue", "delta": -1 }] },
+      { "direction": "right", "labelKo": "숨김", "labelEn": "Hide",   "effects": [{ "target": "rogue",  "delta": 2 }, { "target": "wizard", "delta": -2 }] }
+    ],
+    "weight": 5, "cooldown": 8, "tags": ["dice"]
+  },
+  {
+    "id": "ei_001_doorbell",
+    "category": "external_interruption",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "초인종이 울린다. 피자 배달이다.",
+    "promptEn": "Doorbell rings. Pizza delivery.",
+    "choices": [
+      { "direction": "left",  "labelKo": "끊고 먹는다",  "labelEn": "Pause and eat",  "effects": [{ "target": "all", "delta": 1 }] },
+      { "direction": "right", "labelKo": "진행 강행",    "labelEn": "Push through",   "effects": [{ "target": "fighter", "delta": 1 }, { "target": "cleric", "delta": -2 }] }
+    ],
+    "weight": 6, "cooldown": 12, "tags": ["break"]
+  },
+  {
+    "id": "rd_002_aoo",
+    "category": "rule_dispute",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "마법사: \"기회공격(AoO)은 이동 칸마다 발생 아닌가요?\"",
+    "promptEn": "Wizard: \"Doesn't AoO trigger per square moved?\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "1회만",  "labelEn": "Once only", "effects": [{ "target": "fighter", "delta": 2 }, { "target": "wizard", "delta": -2 }] },
+      { "direction": "right", "labelKo": "5e 정답", "labelEn": "5e RAW",    "effects": [{ "target": "wizard",  "delta": 3 }] }
+    ],
+    "weight": 4, "cooldown": 12, "tags": ["rules"]
+  },
+  {
+    "id": "pn_002_seduce_dragon",
+    "category": "player_nonsense",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "도적: \"드래곤을 유혹해볼게요.\"",
+    "promptEn": "Rogue: \"I attempt to seduce the dragon.\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "즉결 거부",     "labelEn": "Refuse outright",     "effects": [{ "target": "rogue", "delta": -2 }] },
+      { "direction": "right", "labelKo": "매력 판정 허용", "labelEn": "Allow Charisma check", "effects": [{ "target": "rogue", "delta": 3 }, { "target": "wizard", "delta": -1 }] }
+    ],
+    "weight": 7, "cooldown": 10, "tags": ["nonsense", "meme"]
+  },
+  {
+    "id": "bs_001_orphan",
+    "category": "backstory",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "클레릭이 NPC 사제를 보고 어머니 기억을 떠올린다.",
+    "promptEn": "Cleric sees an NPC priest and recalls their mother.",
+    "choices": [
+      { "direction": "left",  "labelKo": "짧게 넘김",      "labelEn": "Move on briefly",   "effects": [{ "target": "cleric", "delta": -1 }] },
+      { "direction": "right", "labelKo": "회상 장면 삽입", "labelEn": "Insert flashback",  "effects": [{ "target": "cleric", "delta": 3 }, { "target": "fighter", "delta": -1 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["backstory"]
+  },
+  {
+    "id": "mb_002_fourth_wall",
+    "category": "meta_break",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "전사가 \"다음 세션 미리 생각해둔 농담이 있는데요\"라며 메타 개그를 꺼낸다.",
+    "promptEn": "Fighter drops a meta joke about \"next session's prep\".",
+    "choices": [
+      { "direction": "left",  "labelKo": "몰입 유지",  "labelEn": "Stay immersed", "effects": [{ "target": "fighter", "delta": -1 }, { "target": "cleric", "delta": 1  }] },
+      { "direction": "right", "labelKo": "같이 웃어줌", "labelEn": "Laugh along",   "effects": [{ "target": "fighter", "delta": 2  }, { "target": "cleric", "delta": -2 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["meta"]
+  },
+  {
+    "id": "tm_002_bathroom",
+    "category": "table_management",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "전사가 \"화장실 갔다 올게요\"라며 자리를 비운다.",
+    "promptEn": "Fighter says \"Bathroom break\" and leaves.",
+    "choices": [
+      { "direction": "left",  "labelKo": "진행 보류",        "labelEn": "Pause",              "effects": [{ "target": "all", "delta": 1 }] },
+      { "direction": "right", "labelKo": "다른 셋 장면 진행", "labelEn": "Continue with others", "effects": [{ "target": "fighter", "delta": -2 }, { "target": "rogue", "delta": 1 }] }
+    ],
+    "weight": 6, "cooldown": 8, "tags": ["break"]
+  },
+  {
+    "id": "sp_003_rogue_solo",
+    "category": "spotlight",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "도적이 또 \"혼자 정찰 가겠다\"고 한다.",
+    "promptEn": "Rogue insists on solo scouting. Again.",
+    "choices": [
+      { "direction": "left",  "labelKo": "허락",         "labelEn": "Allow",              "effects": [{ "target": "rogue", "delta": 2  }, { "target": "others", "delta": -1 }] },
+      { "direction": "right", "labelKo": "파티 동행 요구", "labelEn": "Require the party",  "effects": [{ "target": "rogue", "delta": -2 }, { "target": "cleric", "delta": 2  }] }
+    ],
+    "weight": 5, "cooldown": 8, "tags": ["spotlight"]
+  },
+  {
+    "id": "ei_002_phone",
+    "category": "external_interruption",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "마법사 폰이 요란하게 울린다. 가족 전화.",
+    "promptEn": "Wizard's phone blares. Family calling.",
+    "choices": [
+      { "direction": "left",  "labelKo": "잠시 멈춤", "labelEn": "Pause",      "effects": [{ "target": "wizard", "delta": 2 }, { "target": "fighter", "delta": -1 }] },
+      { "direction": "right", "labelKo": "계속 진행", "labelEn": "Keep going", "effects": [{ "target": "wizard", "delta": -3 }] }
+    ],
+    "weight": 4, "cooldown": 15, "tags": ["interruption"]
+  }
+]
