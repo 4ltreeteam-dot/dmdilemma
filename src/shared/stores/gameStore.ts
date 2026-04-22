@@ -6,7 +6,11 @@ import type { PartySatisfaction, SessionState } from '@/shared/types/session';
 import { TOTAL_CARDS_PER_SESSION } from '@/shared/types/session';
 import { applyEffects } from '@/features/session/engine/satisfaction';
 import { selectNextCard } from '@/features/session/engine/cardSelector';
+import { getPhase } from '@/features/session/engine/phaseEngine';
+import { resolveDiceChoice } from '@/features/session/engine/diceResolver';
+import { computeSessionXp } from '@/features/campaign/engine/progressionEngine';
 import { createRoller, type DiceRoller } from '@/features/dice/roller';
+import { useCampaignStore } from './campaignStore';
 import charactersData from '@/content/characters.json';
 import cardsData from '@/content/cards.json';
 
@@ -16,6 +20,8 @@ const cards = cardsData as unknown as Card[];
 type GameStore = {
   session: SessionState | null;
   roller: DiceRoller;
+  diceRollCount: number;
+  criticalCount: number;
   startSession: (seed?: number) => void;
   applyChoice: (direction: SwipeDirection) => void;
   forceSatisfaction: (next: PartySatisfaction) => void;
@@ -23,27 +29,66 @@ type GameStore = {
 };
 
 function initialSatisfaction(party: CharacterId[]): PartySatisfaction {
-  const map: Partial<PartySatisfaction> = {};
+  const base: PartySatisfaction = {
+    fighter: 0,
+    wizard: 0,
+    rogue: 0,
+    cleric: 0,
+    bard: 0,
+    druid: 0,
+  };
   for (const id of party) {
     const char = characters.find(c => c.id === id);
-    map[id] = char?.defaultSatisfaction ?? 50;
+    base[id] = char?.defaultSatisfaction ?? 50;
   }
-  return map as PartySatisfaction;
+  return base;
 }
 
-function anyoneLeft(satisfaction: PartySatisfaction, party: CharacterId[]): boolean {
-  return party.some(id => satisfaction[id] <= 0);
+function anyoneLeft(satisfaction: PartySatisfaction, party: CharacterId[]): CharacterId | null {
+  for (const id of party) {
+    if (satisfaction[id] <= 0) return id;
+  }
+  return null;
+}
+
+function finalizeSession(
+  session: SessionState,
+  diceRollCount: number,
+  criticalCount: number,
+  playerLeft: CharacterId | null,
+): void {
+  if (!useCampaignStore.getState().campaign) return;
+  const values = session.party.map(id => session.satisfaction[id]);
+  const avg = values.reduce((sum, v) => sum + v, 0) / values.length;
+  const xp = computeSessionXp({
+    averageSatisfaction: avg,
+    criticalCount,
+    rewardedAdWatched: false,
+  });
+  useCampaignStore.getState().finishCurrentSession({
+    finalSatisfaction: session.satisfaction as Record<CharacterId, number>,
+    cardsPlayed: session.cardsPlayed.length,
+    diceRolls: diceRollCount,
+    sessionXp: xp,
+    playerLeft,
+  });
 }
 
 export const useGameStore = create<GameStore>((set, get) => ({
   session: null,
   roller: createRoller(Date.now()),
+  diceRollCount: 0,
+  criticalCount: 0,
 
   startSession: (seed?: number) => {
+    const campaign = useCampaignStore.getState().campaign;
     const roller = createRoller(seed ?? Date.now());
+    if (campaign && campaign.currentSession) {
+      set({ roller, session: campaign.currentSession, diceRollCount: 0, criticalCount: 0 });
+      return;
+    }
     const party: CharacterId[] = ['fighter', 'wizard', 'rogue', 'cleric'];
     const satisfaction = initialSatisfaction(party);
-
     const firstCard = selectNextCard({
       pool: cards,
       party,
@@ -51,15 +96,17 @@ export const useGameStore = create<GameStore>((set, get) => ({
       cardIndex: 0,
       roller,
       sessionIndex: 1,
+      phase: getPhase(0, TOTAL_CARDS_PER_SESSION),
     });
-
     set({
       roller,
+      diceRollCount: 0,
+      criticalCount: 0,
       session: {
         sessionIndex: 1,
         party,
         satisfaction,
-        phase: 'main',
+        phase: 'opening',
         cardsPlayed: [],
         cardsRemaining: TOTAL_CARDS_PER_SESSION,
         currentCard: firstCard,
@@ -70,15 +117,25 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   applyChoice: (direction: SwipeDirection) => {
-    const { session, roller } = get();
+    const { session, roller, diceRollCount, criticalCount } = get();
     if (!session || !session.currentCard || session.isEnded) return;
 
     const choice = session.currentCard.choices.find(c => c.direction === direction);
     if (!choice) return;
-    if (isDiceChoice(choice)) return;
 
     const before = session.satisfaction;
-    const after = applyEffects(before, choice.effects, session.party);
+    let after: PartySatisfaction;
+    let dRolls = diceRollCount;
+    let cCount = criticalCount;
+
+    if (isDiceChoice(choice)) {
+      const resolution = resolveDiceChoice(choice, roller);
+      dRolls += 1;
+      if (resolution.isCritical) cCount += 1;
+      after = applyEffects(before, resolution.effects, session.party);
+    } else {
+      after = applyEffects(before, choice.effects, session.party);
+    }
 
     const cardsPlayed = [
       ...session.cardsPlayed,
@@ -91,36 +148,35 @@ export const useGameStore = create<GameStore>((set, get) => ({
     ];
     const cardsRemaining = session.cardsRemaining - 1;
     const cardIndex = cardsPlayed.length;
+    const playerLeft = anyoneLeft(after, session.party);
 
-    const someoneLeft = anyoneLeft(after, session.party);
-
-    if (someoneLeft) {
-      set({
-        session: {
-          ...session,
-          satisfaction: after,
-          cardsPlayed,
-          cardsRemaining,
-          currentCard: null,
-          isEnded: true,
-          endReason: 'player_left',
-        },
-      });
+    if (playerLeft) {
+      const endedSession: SessionState = {
+        ...session,
+        satisfaction: after,
+        cardsPlayed,
+        cardsRemaining,
+        currentCard: null,
+        isEnded: true,
+        endReason: 'player_left',
+      };
+      set({ session: endedSession, diceRollCount: dRolls, criticalCount: cCount });
+      finalizeSession(endedSession, dRolls, cCount, playerLeft);
       return;
     }
 
     if (cardsRemaining <= 0) {
-      set({
-        session: {
-          ...session,
-          satisfaction: after,
-          cardsPlayed,
-          cardsRemaining: 0,
-          currentCard: null,
-          isEnded: true,
-          endReason: 'cards_exhausted',
-        },
-      });
+      const endedSession: SessionState = {
+        ...session,
+        satisfaction: after,
+        cardsPlayed,
+        cardsRemaining: 0,
+        currentCard: null,
+        isEnded: true,
+        endReason: 'cards_exhausted',
+      };
+      set({ session: endedSession, diceRollCount: dRolls, criticalCount: cCount });
+      finalizeSession(endedSession, dRolls, cCount, null);
       return;
     }
 
@@ -131,11 +187,15 @@ export const useGameStore = create<GameStore>((set, get) => ({
       cardIndex,
       roller,
       sessionIndex: session.sessionIndex,
+      phase: getPhase(cardIndex, TOTAL_CARDS_PER_SESSION),
     });
 
     set({
+      diceRollCount: dRolls,
+      criticalCount: cCount,
       session: {
         ...session,
+        phase: getPhase(cardIndex, TOTAL_CARDS_PER_SESSION),
         satisfaction: after,
         cardsPlayed,
         cardsRemaining,
@@ -153,6 +213,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   reset: () => {
-    set({ session: null, roller: createRoller(Date.now()) });
+    set({
+      session: null,
+      roller: createRoller(Date.now()),
+      diceRollCount: 0,
+      criticalCount: 0,
+    });
   },
 }));
