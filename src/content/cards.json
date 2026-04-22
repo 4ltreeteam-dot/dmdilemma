@@ -193,5 +193,213 @@
       { "direction": "right", "labelKo": "계속 진행", "labelEn": "Keep going", "effects": [{ "target": "wizard", "delta": -3 }] }
     ],
     "weight": 4, "cooldown": 15, "tags": ["interruption"]
+  },
+  {
+    "id": "ir_002_perception_dice",
+    "category": "improv_ruling",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "마법사가 은밀 판정을 굴린다. 결과에 따라 기습 성공 여부가 갈린다.",
+    "promptEn": "The Wizard rolls Stealth. The outcome hangs on the die.",
+    "choices": [
+      {
+        "direction": "left",
+        "labelKo": "🎲 판정",
+        "labelEn": "🎲 Roll",
+        "dice": {
+          "sides": 20,
+          "buckets": [
+            { "min": 1,  "max": 1,  "effects": [{ "target": "wizard", "delta": -4 }, { "target": "others", "delta": -1 }], "flavorKo": "대실패! 발소리가 쩌렁쩌렁" },
+            { "min": 2,  "max": 9,  "effects": [{ "target": "wizard", "delta": -2 }] },
+            { "min": 10, "max": 19, "effects": [{ "target": "wizard", "delta": 1 }] },
+            { "min": 20, "max": 20, "effects": [{ "target": "wizard", "delta": 4 }, { "target": "all", "delta": 1 }], "flavorKo": "자연의 20! 완벽한 잠입" }
+          ]
+        }
+      },
+      {
+        "direction": "right",
+        "labelKo": "자동 성공",
+        "labelEn": "Auto-pass",
+        "effects": [{ "target": "wizard", "delta": -1 }]
+      }
+    ],
+    "weight": 5, "cooldown": 12, "tags": ["dice", "skill"]
+  },
+  {
+    "id": "ir_003_charisma_dice",
+    "category": "improv_ruling",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "도적이 상인과 흥정한다. 매력 판정 결과에 따라 가격이 결정된다.",
+    "promptEn": "The Rogue haggles with a merchant. Charisma roll decides the price.",
+    "choices": [
+      {
+        "direction": "left",
+        "labelKo": "🎲 흥정",
+        "labelEn": "🎲 Haggle",
+        "dice": {
+          "sides": 20,
+          "buckets": [
+            { "min": 1,  "max": 1,  "effects": [{ "target": "rogue", "delta": -3 }, { "target": "cleric", "delta": -1 }], "flavorKo": "상인이 화가 났다" },
+            { "min": 2,  "max": 10, "effects": [{ "target": "rogue", "delta": -1 }] },
+            { "min": 11, "max": 19, "effects": [{ "target": "rogue", "delta": 2 }] },
+            { "min": 20, "max": 20, "effects": [{ "target": "rogue", "delta": 4 }, { "target": "all", "delta": 1 }], "flavorKo": "완벽한 입담" }
+          ]
+        }
+      },
+      {
+        "direction": "right",
+        "labelKo": "정가 지불",
+        "labelEn": "Pay full price",
+        "effects": [{ "target": "rogue", "delta": -2 }]
+      }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["dice", "social"]
+  },
+  {
+    "id": "ir_004_save_dice",
+    "category": "improv_ruling",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "클레릭이 저주에 걸렸다. 저항 판정이 필요하다.",
+    "promptEn": "Cleric is cursed. A saving throw is required.",
+    "choices": [
+      {
+        "direction": "left",
+        "labelKo": "🎲 저항",
+        "labelEn": "🎲 Save",
+        "dice": {
+          "sides": 20,
+          "buckets": [
+            { "min": 1,  "max": 1,  "effects": [{ "target": "cleric", "delta": -5 }, { "target": "all", "delta": -2 }], "flavorKo": "치명적 실패, 캐릭터 의식불명" },
+            { "min": 2,  "max": 9,  "effects": [{ "target": "cleric", "delta": -3 }] },
+            { "min": 10, "max": 19, "effects": [{ "target": "cleric", "delta": 1 }] },
+            { "min": 20, "max": 20, "effects": [{ "target": "cleric", "delta": 5 }, { "target": "all", "delta": 2 }], "flavorKo": "성공! 극적 반전" }
+          ]
+        }
+      }
+    ],
+    "weight": 3, "cooldown": 18, "tags": ["dice", "save", "drama"]
+  },
+  {
+    "id": "bd_001_bard_serenade",
+    "category": "spotlight",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "바드: \"저 NPC 앞에서 발라드를 한 곡 부르겠습니다.\"",
+    "promptEn": "Bard: \"I'll serenade that NPC with a ballad.\"",
+    "requiresCharacter": ["bard"],
+    "choices": [
+      { "direction": "left",  "labelKo": "공연 허용",   "labelEn": "Let them perform", "effects": [{ "target": "bard", "delta": 3 }, { "target": "cleric", "delta": 1 }] },
+      { "direction": "right", "labelKo": "NPC 무시",    "labelEn": "NPC walks away",    "effects": [{ "target": "bard", "delta": -2 }] }
+    ],
+    "weight": 6, "cooldown": 8, "tags": ["bard", "roleplay"]
+  },
+  {
+    "id": "bd_002_bard_inspire",
+    "category": "meta_break",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "바드가 다른 플레이어를 고무시키는 음악을 연주하려 한다.",
+    "promptEn": "The Bard wants to inspire another player with their music.",
+    "requiresCharacter": ["bard"],
+    "choices": [
+      { "direction": "left",  "labelKo": "즉석 판정",   "labelEn": "Improvise ruling",  "effects": [{ "target": "bard", "delta": 2 }, { "target": "all", "delta": 1 }] },
+      { "direction": "right", "labelKo": "메커닉대로",  "labelEn": "By mechanics",      "effects": [{ "target": "bard", "delta": -1 }, { "target": "wizard", "delta": 1 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["bard"]
+  },
+  {
+    "id": "dr_001_druid_pacifist",
+    "category": "meta_break",
+    "dramaLevel": "medium",
+    "minSession": 1,
+    "promptKo": "드루이드: \"잠시만요, 저 고블린도 가족이 있지 않을까요?\"",
+    "promptEn": "Druid: \"Wait, doesn't that goblin have a family?\"",
+    "requiresCharacter": ["druid"],
+    "choices": [
+      { "direction": "left",  "labelKo": "협상 시도", "labelEn": "Negotiate",    "effects": [{ "target": "druid", "delta": 3 }, { "target": "cleric", "delta": 2 }, { "target": "fighter", "delta": -2 }] },
+      { "direction": "right", "labelKo": "전투 강행", "labelEn": "Fight anyway", "effects": [{ "target": "druid", "delta": -3 }, { "target": "fighter", "delta": 1 }] }
+    ],
+    "weight": 6, "cooldown": 8, "tags": ["druid", "pacifist"]
+  },
+  {
+    "id": "dr_002_druid_shape",
+    "category": "player_nonsense",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "드루이드가 \"곰으로 변신해서 대화해볼게요\"라고 말한다.",
+    "promptEn": "Druid says \"I'll turn into a bear and try to talk.\"",
+    "requiresCharacter": ["druid"],
+    "choices": [
+      { "direction": "left",  "labelKo": "무리한 요청",   "labelEn": "Rule it out",    "effects": [{ "target": "druid", "delta": -2 }] },
+      { "direction": "right", "labelKo": "즉흥 허용",     "labelEn": "Allow it",       "effects": [{ "target": "druid", "delta": 3 }, { "target": "wizard", "delta": -1 }] }
+    ],
+    "weight": 5, "cooldown": 10, "tags": ["druid", "nonsense"]
+  },
+  {
+    "id": "hv_001_character_death",
+    "category": "meta_break",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "보스 전투 막바지. 전사가 쓰러지면 죽는다. 극적 반전을 허용할까?",
+    "promptEn": "Boss fight climax. If the Fighter falls, they die. Allow a dramatic save?",
+    "choices": [
+      { "direction": "left",  "labelKo": "공정한 죽음", "labelEn": "Fair death",     "effects": [{ "target": "fighter", "delta": -4 }, { "target": "wizard", "delta": 1 }] },
+      { "direction": "right", "labelKo": "극적 반전",   "labelEn": "Dramatic save",  "effects": [{ "target": "fighter", "delta": 4 }, { "target": "all", "delta": 1 }, { "target": "rogue", "delta": -1 }] }
+    ],
+    "weight": 3, "cooldown": 20, "tags": ["drama", "death"]
+  },
+  {
+    "id": "hv_002_betrayal",
+    "category": "backstory",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "NPC 동료가 배신한다. 도적이 \"제 캐릭터는 처음부터 알고 있었어요\"라며 끼어든다.",
+    "promptEn": "An NPC ally betrays. Rogue cuts in: \"My character knew all along.\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "서사 뒤집기", "labelEn": "Rewrite arc",  "effects": [{ "target": "rogue", "delta": 4 }, { "target": "others", "delta": -2 }] },
+      { "direction": "right", "labelKo": "원래 설정대로", "labelEn": "Stick to plan", "effects": [{ "target": "rogue", "delta": -3 }, { "target": "cleric", "delta": 1 }, { "target": "wizard", "delta": 1 }] }
+    ],
+    "weight": 4, "cooldown": 15, "tags": ["drama", "backstory"]
+  },
+  {
+    "id": "hv_003_moral_dilemma",
+    "category": "meta_break",
+    "dramaLevel": "heavy",
+    "minSession": 1,
+    "promptKo": "납치범이 인질 두 명 중 하나만 살리라고 한다. 클레릭이 고뇌한다.",
+    "promptEn": "The kidnapper forces a choice: save only one of two hostages. The Cleric agonizes.",
+    "choices": [
+      { "direction": "left",  "labelKo": "고뇌 연출 제공", "labelEn": "Spotlight the moment", "effects": [{ "target": "cleric", "delta": 3 }, { "target": "fighter", "delta": -1 }] },
+      { "direction": "right", "labelKo": "빠르게 넘기기",    "labelEn": "Move past it",         "effects": [{ "target": "cleric", "delta": -3 }] }
+    ],
+    "weight": 3, "cooldown": 15, "tags": ["drama", "moral"]
+  },
+  {
+    "id": "lt_001_opening_banter",
+    "category": "spotlight",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "세션 시작, 전사가 \"저번 주 이야기 먼저 정리해볼까요?\"라고 묻는다.",
+    "promptEn": "Session opening. Fighter asks: \"Should we recap last week?\"",
+    "choices": [
+      { "direction": "left",  "labelKo": "요약 공유",     "labelEn": "Summarize",  "effects": [{ "target": "all", "delta": 1 }] },
+      { "direction": "right", "labelKo": "바로 시작",     "labelEn": "Jump right in", "effects": [{ "target": "fighter", "delta": 1 }, { "target": "cleric", "delta": -1 }] }
+    ],
+    "weight": 7, "cooldown": 6, "tags": ["opening"]
+  },
+  {
+    "id": "lt_002_npc_voice",
+    "category": "spotlight",
+    "dramaLevel": "light",
+    "minSession": 1,
+    "promptKo": "NPC 여관 주인을 연기해야 한다. 목소리를 맡아서 할까, 그냥 서술할까?",
+    "promptEn": "Time to voice an NPC innkeeper. Funny accent or plain narration?",
+    "choices": [
+      { "direction": "left",  "labelKo": "과장된 연기", "labelEn": "Full voice act", "effects": [{ "target": "rogue", "delta": 2 }, { "target": "cleric", "delta": 1 }] },
+      { "direction": "right", "labelKo": "서술로",     "labelEn": "Just describe",  "effects": [{ "target": "wizard", "delta": 1 }, { "target": "rogue", "delta": -1 }] }
+    ],
+    "weight": 6, "cooldown": 7, "tags": ["npc"]
   }
 ]
